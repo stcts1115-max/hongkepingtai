@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>助农主题图片预览</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
+        h1 { text-align: center; color: #00d2ff; margin-bottom: 30px; font-size: 2.5em; }
+        .category { margin-bottom: 40px; background: #16213e; border-radius: 15px; padding: 25px; }
+        .category h2 { color: #e94560; margin-bottom: 15px; font-size: 1.8em; border-bottom: 2px solid #e94560; padding-bottom: 10px; }
+        .images { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .image-card { background: #0f3460; border-radius: 10px; overflow: hidden; transition: transform 0.3s; }
+        .image-card:hover { transform: translateY(-5px); }
+        .image-card img { width: 100%; height: 250px; object-fit: cover; display: block; }
+        .image-card .info { padding: 15px; }
+        .image-card .filename { font-size: 0.9em; color: #00d2ff; word-break: break-all; }
+        .image-card .size { font-size: 0.8em; color: #aaa; margin-top: 5px; }
+        .empty { text-align: center; padding: 40px; color: #666; font-style: italic; }
+        .stats { text-align: center; margin-bottom: 30px; padding: 15px; background: #e94560; border-radius: 10px; }
+        .stats span { margin: 0 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🌾 助农主题图片库预览</h1>
+    <div class="stats">
+        <span>总分类: 0</span>
+        <span>成功下载: 0</span>
+        <span>下载失败: 0</span>
+    </div>    <script>
+        // 图片加载失败时替换为占位符
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.style.display = 'none';
+                this.parentElement.innerHTML = '<div style="height:250px;display:flex;align-items:center;justify-content:center;background:#0f3460;color:#e94560;">图片加载失败</div>';
+            };
+        });
+    </script>
+</body>
+</html>
