@@ -1,0 +1,3619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红色助农 · 兴农强国</title>
+    <link rel="preconnect" href="https://fonts.font.im">
+    <link href="https://fonts.font.im/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 顶部导航 */
+        #top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(222, 41, 16, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        #top-header.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .emblem {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-text {
+            margin-left: 12px;
+        }
+
+        .logo-title {
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .logo-sub {
+            display: block;
+            font-size: 11px;
+            opacity: 0.85;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 222, 0, 0.2);
+            color: #FFDE00;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-6px, 6px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-6px, -6px);
+        }
+
+        /* 英雄区 */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/01-hero-banner/red-farmland-hero.jpg') center/cover no-repeat;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139,0,0,0.7) 0%, rgba(222,41,16,0.6) 50%, rgba(178,34,34,0.7) 100%);
+        }
+
+        .flag-stripe {
+            position: absolute;
+            width: 100%;
+            height: 12%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .stripe-1 { top: 10%; }
+        .stripe-2 { top: 30%; }
+        .stripe-3 { top: 50%; }
+
+        .flag-star {
+            position: absolute;
+            color: rgba(255, 222, 0, 0.15);
+            font-size: 200px;
+            top: 10%;
+            left: 15%;
+        }
+
+        .flag-star.small {
+            font-size: 60px;
+            opacity: 0.08;
+        }
+
+        .s1 { top: 25%; right: 20%; }
+        .s2 { top: 60%; left: 10%; }
+        .s3 { bottom: 20%; right: 30%; }
+        .s4 { top: 40%; right: 10%; }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 222, 0, 0.2);
+            color: #FFDE00;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 222, 0, 0.3);
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 900;
+            font-family: 'Noto Serif SC', serif;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 48px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #FFDE00;
+            color: #8B0000;
+        }
+
+        .btn-primary:hover {
+            background: #FFD700;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 222, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-num {
+            display: block;
+            font-size: 32px;
+            font-weight: 900;
+            color: #FFDE00;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 14px;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-hint span {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .scroll-arrow::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 3px;
+            animation: scroll 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+
+        /* 通用区块样式 */
+        .section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .section-alt {
+            background: #f8f9fa;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(222, 41, 16, 0.1);
+            color: #DE2910;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 视频网格 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .video-grid.compact {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .video-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumb {
+            position: relative;
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .video-cover {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .cover-emoji {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .cover-title {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: #DE2910;
+        }
+
+        .video-card:hover .video-play-btn {
+            opacity: 1;
+        }
+
+        .video-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .video-tag.red { background: #DE2910; }
+        .video-tag.gold { background: #DAA520; }
+        .video-tag.green { background: #228B22; }
+        .video-tag.blue { background: #4169E1; }
+        .video-tag.brown { background: #8B4513; }
+
+        .video-body {
+            padding: 16px;
+        }
+
+        .video-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .video-info {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* 农技课堂标签 */
+        .tech-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tab {
+            padding: 10px 28px;
+            border: 2px solid #ddd;
+            background: #fff;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tab:hover {
+            border-color: #DE2910;
+            color: #DE2910;
+        }
+
+        .tech-tab.active {
+            background: #DE2910;
+            border-color: #DE2910;
+            color: #fff;
+        }
+
+        .tech-panel {
+            display: none;
+        }
+
+        .tech-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 政策时间线 */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #DE2910, #FFDE00);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #FFDE00;
+            border: 4px solid #DE2910;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-card {
+            width: calc(50% - 40px);
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-card {
+            margin-right: calc(50% + 40px);
+        }
+
+        .timeline-item:nth-child(even) .timeline-card {
+            margin-left: calc(50% + 40px);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: #DE2910;
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .timeline-card h3 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .timeline-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* 政策亮点 */
+        .policy-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .policy-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-top: 4px solid #DE2910;
+        }
+
+        .policy-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .policy-card h3 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .policy-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 文章卡片 */
+        .articles {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .article-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .article-card.featured {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 0;
+        }
+
+        .article-img {
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .article-img-emoji {
+            font-size: 80px;
+        }
+
+        .article-body {
+            padding: 32px;
+        }
+
+        .article-tag {
+            display: inline-block;
+            background: rgba(222, 41, 16, 0.1);
+            color: #DE2910;
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .article-card h3 {
+            font-size: 22px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .article-card p {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .article-expand {
+            background: none;
+            border: none;
+            color: #DE2910;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 8px 0;
+            margin-top: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .article-expand:hover {
+            color: #8B0000;
+        }
+
+        /* 青年力量 */
+        .youth-banner {
+            background: linear-gradient(135deg, #DE2910 0%, #8B0000 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 48px;
+        }
+
+        .youth-quote {
+            text-align: center;
+            color: #fff;
+        }
+
+        .quote-mark {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+        }
+
+        .youth-quote p {
+            font-size: 18px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .youth-ways {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .way-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid #FFDE00;
+            transition: all 0.3s ease;
+        }
+
+        .way-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .way-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .way-card h3 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .way-card p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .way-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .way-tags span {
+            background: rgba(222, 41, 16, 0.08);
+            color: #DE2910;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        /* 农民风采 */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .story-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* 故事详情 - 公众号风格 */
+        .story-hero-img {
+            width: 100%;
+            height: 260px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .story-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+            font-size: 13px;
+            color: #999;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        .story-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .story-quote {
+            background: #FAF6F1;
+            border-left: 3px solid #DE2910;
+            padding: 14px 18px;
+            margin: 20px 0;
+            color: #8a5a3a;
+            font-size: 15px;
+            line-height: 1.7;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .story-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .story-gallery img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .story-gallery-caption {
+            font-size: 12px;
+            color: #aaa;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .story-footer {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .story-source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #DE2910;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .story-source-link:hover {
+            background: #b81f0c;
+        }
+
+        .story-disclaimer {
+            font-size: 12px;
+            color: #bbb;
+            margin-top: 14px;
+            line-height: 1.6;
+        }
+
+        .story-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .story-img {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-emoji {
+            font-size: 50px;
+        }
+
+        .story-body {
+            padding: 20px;
+        }
+
+        .story-body h3 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .story-body p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .story-tag {
+            display: inline-block;
+            font-size: 13px;
+            color: #DE2910;
+            font-weight: 500;
+        }
+
+        /* 鼓舞区 */
+        .inspire {
+            position: relative;
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .inspire-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/05-rural-scenery/rural-village.jpg') center/cover no-repeat;
+        }
+        
+        .inspire-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(26,26,26,0.85) 0%, rgba(45,45,45,0.75) 100%);
+        }
+
+        .inspire-stars {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 30px;
+            color: rgba(255, 222, 0, 0.1);
+            transform: rotate(-15deg);
+        }
+
+        .inspire .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .inspire-title {
+            font-size: 32px;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .inspire-desc {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .inspire-counter {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .counter-item {
+            text-align: center;
+        }
+
+        .counter-num {
+            font-size: 48px;
+            font-weight: 900;
+            color: #FFDE00;
+        }
+
+        .counter-unit {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-left: 4px;
+        }
+
+        .counter-label {
+            display: block;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+        }
+
+        /* 渠道共享板块样式 */
+        .channel-share {
+            padding: 80px 0;
+            background: #fff;
+            border-top: 2px dashed rgba(222, 41, 16, 0.2);
+        }
+
+        .share-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+
+        /* 左侧：种类按钮区 */
+        .share-left {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-right: 20px;
+            border-right: 1px solid #eee;
+        }
+
+        .share-left h3, .share-right h3 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .type-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .type-btn {
+            padding: 15px 10px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .type-btn .btn-icon {
+            font-size: 22px;
+        }
+
+        .type-btn:hover {
+            border-color: #DE2910;
+            color: #DE2910;
+            background: rgba(222, 41, 16, 0.02);
+        }
+
+        .type-btn.active {
+            background: #DE2910;
+            border-color: #DE2910;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(222, 41, 16, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* 右侧：输入表单区 */
+        .share-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .form-group input, .form-group select {
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #DE2910;
+            box-shadow: 0 0 0 3px rgba(222, 41, 16, 0.1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .btn-submit {
+            background: #DE2910;
+            color: #fff;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #b81f0c;
+            box-shadow: 0 4px 15px rgba(222, 41, 16, 0.3);
+        }
+
+        .btn-clear-data {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #ced4da;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-clear-data:hover {
+            background: #e2e6ea;
+            color: #343a40;
+        }
+
+        /* 共享数据展示看板 */
+        .share-board {
+            margin-top: 40px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .board-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+
+        .board-header h4 {
+            font-size: 16px;
+            color: #212529;
+            font-weight: 700;
+        }
+
+        .board-count {
+            background: rgba(222, 41, 16, 0.1);
+            color: #DE2910;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            position: relative;
+            transition: all 0.3s;
+            animation: cardFadeIn 0.4s ease-out;
+        }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-color: rgba(222, 41, 16, 0.2);
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag-type {
+            background: #e3f2fd;
+            color: #0d47a1;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .tag-identity {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .tag-identity.farmer {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .tag-identity.dealer {
+            background: #f3e5f5;
+            color: #4a148c;
+        }
+
+        .card-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+
+        .card-detail-item {
+            font-size: 13px;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .card-detail-item span {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .empty-tip {
+            text-align: center;
+            color: #adb5bd;
+            padding: 40px 0;
+            grid-column: 1 / -1;
+            font-size: 14px;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .share-layout {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 15px;
+            }
+            .share-left {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-right: 0;
+                padding-bottom: 20px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        /* 页脚 */
+        .site-footer {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 48px 0;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-emblem {
+            width: 50px;
+            height: 50px;
+        }
+
+        .footer-title {
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .footer-motto {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #FFDE00;
+        }
+
+        .footer-bottom {
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 8px;
+        }
+
+        .footer-note {
+            font-size: 12px !important;
+        }
+
+        /* 弹窗 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+        }
+
+        .modal-content {
+            position: relative;
+            background: #fff;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .article-modal-content {
+            max-width: 700px;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+
+        .shared-story-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        .shared-story-card:hover {
+            transform: translateY(-4px);
+        }
+        .story-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .story-header h3 {
+            color: #1a1a1a;
+            margin: 0;
+            font-size: 18px;
+        }
+        .story-category {
+            background: linear-gradient(135deg, #FB7299, #FF6699);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .story-content {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .story-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .story-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999;
+            font-size: 13px;
+        }
+        .share-form {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FB7299;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #FB7299, #FF6699);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(251,114,153,0.3);
+        }
+
+        #modal-player {
+            padding-top: 56.25%;
+            position: relative;
+            background: #000;
+        }
+
+        #modal-info {
+            padding: 20px;
+        }
+
+        #article-detail {
+            padding: 40px;
+        }
+
+        #article-detail h2 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        #article-detail p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(222, 41, 16, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+                display: none;
+            }
+
+            .main-nav.active {
+                display: flex;
+            }
+
+            .nav-link {
+                padding: 12px 16px;
+                border-radius: 6px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-desc {
+                font-size: 16px;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .stat-num {
+                font-size: 24px;
+            }
+
+            .article-card.featured {
+                grid-template-columns: 1fr;
+            }
+
+            .article-img {
+                min-height: 200px;
+            }
+
+            .timeline::before {
+                left: 24px;
+            }
+
+            .timeline-dot {
+                left: 24px;
+                transform: none;
+            }
+
+            .timeline-card {
+                width: calc(100% - 64px);
+                margin-left: 64px !important;
+                margin-right: 0 !important;
+            }
+
+            .inspire-counter {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+        /* 学习记录悬浮面板 */
+        .study-record {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1500;
+        }
+        .study-record-toggle {
+            width: 44px;
+            height: 44px;
+            background: rgba(222, 41, 16, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(222, 41, 16, 0.3);
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+        .study-record-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(222, 41, 16, 0.4);
+        }
+        .study-record-panel {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 16px;
+            min-width: 200px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(222, 41, 16, 0.15);
+            margin-top: 8px;
+        }
+        .study-record-panel.show {
+            display: block;
+        }
+        .study-record-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #DE2910;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(222, 41, 16, 0.15);
+        }
+        .study-record-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            font-size: 13px;
+            color: #555;
+        }
+        .study-record-item span:last-child {
+            font-weight: 600;
+            color: #333;
+        }
+        .study-record-score {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid rgba(222, 41, 16, 0.15);
+            font-size: 14px;
+            font-weight: 700;
+            color: #DE2910;
+        }
+        .study-record-score span:last-child {
+            font-size: 18px;
+            color: #FF6600;
+        }
+        /* 政策文件参考 */
+        .policy-doc-ref {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(222, 41, 16, 0.2);
+        }
+        .policy-doc-toggle {
+            background: none;
+            border: none;
+            color: #DE2910;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+        }
+        .policy-doc-toggle:hover {
+            color: #8B0000;
+        }
+        .policy-doc-toggle .arrow {
+            transition: transform 0.3s ease;
+            font-size: 10px;
+        }
+        .policy-doc-toggle.open .arrow {
+            transform: rotate(90deg);
+        }
+        .policy-doc-list {
+            display: none;
+            margin-top: 8px;
+            padding: 10px 12px;
+            background: rgba(222, 41, 16, 0.04);
+            border-radius: 8px;
+            border-left: 3px solid #DE2910;
+        }
+        .policy-doc-list.show {
+            display: block;
+        }
+        .policy-doc-list a {
+            display: block;
+            font-size: 12px;
+            color: #555;
+            text-decoration: none;
+            padding: 3px 0;
+            line-height: 1.6;
+            transition: color 0.2s;
+        }
+        .policy-doc-list a:hover {
+            color: #DE2910;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<header id="top-header">
+    <div class="header-inner">
+        <a class="logo" href="#hero">
+            <svg class="emblem" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#DE2910" stroke="#FFDE00" stroke-width="3"/><g transform="translate(50,50)"><g fill="#FFDE00"><path d="M-5,-30 L5,-30 L5,5 L-5,5Z"/><path d="M-3,-32 L3,-32 L0,-38Z"/><rect x="-20" y="-5" width="40" height="5" rx="1"/><path d="M18,-8 L28,-18 L30,-16 L20,-6Z"/><path d="M20,-4 Q30,-8 32,-2 Q34,4 24,2Z"/></g><g fill="#FFDE00" transform="scale(-1,1)"><path d="M18,-8 L28,-18 L30,-16 L20,-6Z"/><path d="M20,-4 Q30,-8 32,-2 Q34,4 24,2Z"/></g><circle cx="0" cy="-10" r="6" fill="#FFDE00"/></g></svg>
+            <div class="logo-text">
+                <span class="logo-title">红色助农</span>
+                <span class="logo-sub">兴农强国 · 共同富裕</span>
+            </div>
+        </a>
+        <nav class="main-nav" id="main-nav">
+            <a href="#hero" class="nav-link active">首页</a>
+            <a href="#red-courses" class="nav-link">红课学习</a>
+            <a href="#farming-tech" class="nav-link">农技课堂</a>
+            <a href="#policies" class="nav-link">助农政策</a>
+            <a href="#agri-importance" class="nav-link">农业专栏</a>
+            <a href="#youth" class="nav-link">青年力量</a>
+            <a href="#stories" class="nav-link">农民风采</a>
+            <a href="#channel-share" class="nav-link">渠道共享</a>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+<!-- 学习记录悬浮面板 -->
+<div id="study-record" class="study-record">
+    <div class="study-record-toggle" id="study-toggle" title="学习记录">📊</div>
+    <div class="study-record-panel" id="study-panel">
+        <div class="study-record-title">📖 学习记录</div>
+        <div class="study-record-item">
+            <span>🎬 视频学习</span>
+            <span id="video-time">0分钟</span>
+        </div>
+        <div class="study-record-item">
+            <span>📄 文章阅读</span>
+            <span id="article-time">0分钟</span>
+        </div>
+        <div class="study-record-score">
+            <span>⭐ 积分</span>
+            <span id="total-score">0</span>
+        </div>
+    </div>
+</div>
+
+<!-- 英雄区 -->
+<section id="hero" class="hero">
+    <div class="hero-bg">
+        <div class="flag-stripe stripe-1"></div>
+        <div class="flag-stripe stripe-2"></div>
+        <div class="flag-stripe stripe-3"></div>
+        <div class="flag-star">★</div>
+        <div class="flag-star small s1">★</div>
+        <div class="flag-star small s2">★</div>
+        <div class="flag-star small s3">★</div>
+        <div class="flag-star small s4">★</div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-badge">☭ 永远跟党走</div>
+        <h1 class="hero-title">红色助农 · 兴农强国</h1>
+        <p class="hero-desc">以红色思想为引领，以科技助农为使命<br>让每一位农民的日子越过越红火</p>
+        <div class="hero-actions">
+            <a href="#red-courses" class="btn btn-primary">观看红课</a>
+            <a href="#farming-tech" class="btn btn-outline">学习农技</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat"><span class="stat-num">14亿</span><span class="stat-label">中国人的饭碗</span></div>
+            <div class="stat"><span class="stat-num">5.6亿</span><span class="stat-label">农村常住人口</span></div>
+            <div class="stat"><span class="stat-num">9899万</span><span class="stat-label">脱贫攻坚成就</span></div>
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <span>向下滚动探索</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- 红课学习 -->
+<section id="red-courses" class="section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">🔴 红课学习</div>
+            <h2 class="section-title">传承红色基因 · 汲取奋进力量</h2>
+            <p class="section-desc">学习党的光辉历程，感悟初心使命，坚定理想信念</p >
+        </div>
+        <div class="video-grid">
+            <div class="video-card" data-link="https://www.bilibili.com/video/BV1mx411m7iL/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                <div class="video-thumb">
+                    <div class="video-cover" style="background:url('./party.jpg') center/cover no-repeat;">
+                        <span class="cover-emoji">🎬</span>
+                        <span class="cover-title">建党伟业</span>
+                    </div>
+                    <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                    <span class="video-tag red">红色经典</span>
+                </div>
+                <div class="video-body">
+                    <h3 class="video-name">建党伟业</h3>
+                    <p class="video-info">重温中国共产党创建的伟大历程，感受先驱者们的坚定信仰与不屈精神。</p >
+                </div>
+            </div>
+            <div class="video-card" data-link=" https://www.bilibili.com/video/BV1Fs421w7V7/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                <div class="video-thumb">
+                    <div class="video-cover" style="background:url('./yuanlongping.jpg') center/cover no-repeat;">
+                        <span class="cover-emoji">🌾</span>
+                        <span class="cover-title">袁隆平</span>
+                    </div>
+                    <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                    <span class="video-tag gold">时代楷模</span>
+                </div>
+                <div class="video-body">
+                    <h3 class="video-name">袁隆平：把饭碗牢牢端在自己手中</h3>
+                    <p class="video-info">杂交水稻之父袁隆平院士的感人故事，用一粒种子改变世界。</p >
+                </div>
+            </div>
+            <div class="video-card" data-link="https://www.bilibili.com/video/BV1cU4y1p7rm/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                <div class="video-thumb">
+                    <div class="video-cover" style="background:url('./fight against poverty.jpg') center/cover no-repeat;">
+                        <span class="cover-emoji">🏔️</span>
+                        <span class="cover-title">脱贫攻坚</span>
+                    </div>
+                    <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                    <span class="video-tag red">脱贫攻坚</span>
+                </div>
+                <div class="video-body">
+                    <h3 class="video-name">决战脱贫攻坚</h3>
+                    <p class="video-info">记录中国人类历史上规模最大的脱贫攻坚战，近一亿人脱贫的伟大壮举。</p >
+                </div>
+            </div>
+            <div class="video-card" data-link=" https://www.bilibili.com/video/BV1AH4y1z7JM/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                <div class="video-thumb">
+                    <div class="video-cover" style="background:url('./the long march.jpg') center/cover no-repeat;">
+                        <span class="cover-emoji">📜</span>
+                        <span class="cover-title">长征精神</span>
+                    </div>
+                    <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                    <span class="video-tag red">党史学习</span>
+                </div>
+                <div class="video-body">
+                    <h3 class="video-name">长征：永远在路上</h3>
+                    <p class="video-info">回顾两万五千里长征的壮丽史诗，传承不怕艰难险阻的长征精神。</p >
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 农技课堂 -->
+<section id="farming-tech" class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">🌱 农技课堂</div>
+            <h2 class="section-title">科技兴农 · 知识惠农</h2>
+            <p class="section-desc">先进种植技术与农机操作指南，让科技为农业插上翅膀</p >
+        </div>
+        <div class="tech-tabs">
+            <button class="tech-tab active" data-tab="planting">种植技术</button>
+            <button class="tech-tab" data-tab="machine">农机操作</button>
+            <button class="tech-tab" data-tab="breed">养殖技术</button>
+            <button class="tech-tab" data-tab="eco">生态农业</button>
+        </div>
+        <div class="tech-panels">
+            <!-- 种植技术 -->
+            <div class="tech-panel active" id="tab-planting">
+                <div class="video-grid compact">
+                    <div class="video-card" data-links='[{"title":"品种选择","url":" https://www.bilibili.com/video/BV1H1c8emE3t/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":" 育秧技术","url":"https://www.bilibili.com/video/BV1EgQZBpEgn/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":" 田间管理","url":"https://www.bilibili.com/video/BV1zt411x7si/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":" 病虫害防治","url":"https://www.bilibili.com/video/BV1UL4y1H7Uz/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"}]'>
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./shuidaozaipeijishu.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🌾</span>
+                                <span class="cover-title">水稻种植</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag green">种植</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">超级稻高产栽培技术</h3>
+                            <p class="video-info">系统讲解超级稻品种选择、育秧、田间管理及病虫害防治关键技术。</p >
+                        </div>
+                    </div>
+                    <div class="video-card" data-link="https://www.bilibili.com/video/BV1S8xre9EfD/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./yumimizhigaochan.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🌽</span>
+                                <span class="cover-title">玉米种植</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag green">种植</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">玉米密植高产精准调控技术</h3>
+                            <p class="video-info">中国农科院专家讲解玉米密植技术要点，实现亩产突破。</p >
+                        </div>
+                    </div>
+                    <div class="video-card" data-links='[{"title":"湿度管理","url":" https://www.bilibili.com/video/BV1XRGf6XEmU/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":"水肥一体化","url":" https://www.bilibili.com/video/BV1EkeaePEzk/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":"绿色防控","url":" https://www.bilibili.com/video/BV1BM41117wt/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"}]'>
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./wenshidapeng.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🍅</span>
+                                <span class="cover-title">大棚蔬菜</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag green">种植</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">温室大棚蔬菜高效种植</h3>
+                            <p class="video-info">大棚温湿度管理、水肥一体化、绿色防控技术全攻略。</p >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 农机操作 -->
+            <div class="tech-panel" id="tab-machine">
+                <div class="video-grid compact">
+                    <div class="video-card" data-links='[{"title":"拖拉机操作","url":" https://www.bilibili.com/video/BV1jD4y1o7fP/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":"拖拉机维护","url":"  https://www.bilibili.com/video/BV1C64y1c7NY/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"}]'>
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./tuolaji.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🚜</span>
+                                <span class="cover-title">拖拉机</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag blue">农机</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">大马力拖拉机操作与维护</h3>
+                            <p class="video-info">从启动到作业，详解拖拉机安全操作规程与日常保养要点。</p >
+                        </div>
+                    </div>
+                    <div class="video-card" data-link=" https://www.bilibili.com/video/BV1NjWLzcEvU/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./drone.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🤖</span>
+                                <span class="cover-title">植保无人机</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag blue">农机</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">农业植保无人机飞防技术</h3>
+                            <p class="video-info">无人机喷洒农药操作教程，助力精准农业、高效植保。</p >
+                        </div>
+                    </div >
+                    <div class="video-card" data-links='[{"title":"工作原理","url":" https://www.bilibili.com/video/BV1yyrrBZEoD/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":"故障排除","url":" https://www.bilibili.com/video/BV1r4411N7AR/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"}]'>
+                        <div class="video-thumb">  
+                        <div class="video-cover" style="background:url('./lianheshougeji.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">⚙️</span>
+                                <span class="cover-title">收割机</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag blue">农机</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">联合收割机操作指南</h3>
+                            <p class="video-info">收割机作业流程、调整技巧与故障排除，抢收季节必备知识。</p >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 养殖技术 -->
+            <div class="tech-panel" id="tab-breed">
+                <div class="video-grid compact">
+                    <div class="video-card" data-links='[{"title":"科学养牛","url":" https://www.bilibili.com/video/BV1UG4y1s7Yy/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":"养料配比","url":" https://www.bilibili.com/video/BV1gL4y1t773/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"}]'>
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./rouniu.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🐄</span>
+                                <span class="cover-title">科学养牛</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag brown">养殖</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">肉牛科学饲养管理技术</h3>
+                            <p class="video-info">品种改良、饲料配比、疫病防控，科学养牛增收致富。</p >
+                        </div>
+                    </div>
+                    <div class="video-card" data-links='[{"title":"果园养鸡","url":"https://www.bilibili.com/video/BV1YstuzKEkF/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":"养殖技术","url":" https://www.bilibili.com/video/BV13R4y1c7gg/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"}]'>
+                        <div class="video-thumb">
+                        <div class="video-cover" style="background:url('./linxiashengtaiyangji.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🐔</span>
+                                <span class="cover-title">生态养鸡</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag brown">养殖</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">林下生态养鸡实用技术</h3>
+                            <p class="video-info">果园林地散养鸡技术，绿色生态养殖模式详解。</p >
+                        </div>
+                    </div>
+                    <div class="video-card" data-link=" https://www.bilibili.com/video/BV1xL4y1V71W/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./daoyuzonghe.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🐟</span>
+                                <span class="cover-title">水产养殖</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag brown">养殖</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">稻渔综合种养技术</h3>
+                            <p class="video-info">稻鱼稻虾共作模式，一水两用、一田双收的生态养殖技术。</p >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 生态农业 -->
+            <div class="tech-panel" id="tab-eco">
+                <div class="video-grid compact">
+                    <div class="video-card" data-link="https://www.bilibili.com/video/BV1Dm41167BK/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./xunhuannongye.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">♻️</span>
+                                <span class="cover-title">循环农业</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag green">生态</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">循环农业模式与实践</h3>
+                            <p class="video-info">种养结合、废弃物资源化利用，打造绿色循环农业体系。</p >
+                        </div>
+                    </div>
+                    <div class="video-card" data-links='[{"title":"土壤改良","url":" https://www.bilibili.com/video/BV1hzZSYkEVk/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"},{"title":"生物防治","url":" https://www.bilibili.com/video/BV1QX4y1u73A/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064"}]'>
+                     <div class="video-thumb"> 
+                        <div class="video-cover" style="background:url('./youjinongchanping.jpg') center/cover no-repeat;">      
+                        <span class="cover-emoji">🌿</span>
+                                <span class="cover-title">有机种植</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag green">生态</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">有机农产品种植技术规范</h3>
+                            <p class="video-info">从土壤改良到生物防治，全流程有机种植技术指导。</p >
+                        </div>
+                    </div>
+                    <div class="video-card" data-link=" https://www.bilibili.com/video/BV1su411y7y4/?share_source=copy_web&vd_source=f71bfe73555f81281ffc8575526df064">
+                        <div class="video-thumb">
+                            <div class="video-cover" style="background:url('./xiuxiannongye.jpg') center/cover no-repeat;">
+                                <span class="cover-emoji">🏡</span>
+                                <span class="cover-title">休闲农业</span>
+                            </div>
+                            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+                            <span class="video-tag green">生态</span>
+                        </div>
+                        <div class="video-body">
+                            <h3 class="video-name">休闲农业与乡村旅游开发</h3>
+                            <p class="video-info">农旅融合新模式，让美丽乡村成为增收新引擎。</p >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 助农政策 -->
+<section id="policies" class="section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">📋 助农政策</div>
+            <h2 class="section-title">党旗领航 · 政策惠农</h2>
+            <p class="section-desc">中国共产党始终把"三农"问题作为全党工作的重中之重，持续出台惠农政策，推动农业农村现代化</p >
+        </div>
+
+        <!-- 时间线 -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2026</div>
+                      <h3>中央一号文件：锚定农业农村现代化 扎实推进乡村全面振兴</h3>
+                         <p>以改革开放和科技创新为动力，锚定农业农村现代化目标，扎实推进乡村全面振兴，确保国家粮食安全，提升乡村产业发展、乡村建设、乡村治理水平。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                         <a href="https://www.gov.cn/gongbao/2026/issue_12566/202602/content_7057938.html" target="_blank">《中共中央 国务院关于锚定农业农村现代化 扎实推进乡村全面振兴的意见》（2026年中央一号文件）</a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2025</div>
+                    <h3>中央一号文件：进一步深化农村改革</h3>
+                    <p>以改革开放和科技创新为动力，巩固和完善农村基本经营制度，深入学习运用"千万工程"经验，确保国家粮食安全，确保不发生规模性返贫致贫。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/2025/issue_11906/202503/content_7011166.html" target="_blank">《中共中央 国务院关于进一步深化农村改革扎实推进乡村全面振兴的意见》（2025年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2024</div>
+                    <h3>中央一号文件：学习运用"千万工程"经验</h3>
+                    <p>有力有效推进乡村全面振兴，确保国家粮食安全、确保不发生规模性返贫，提升乡村产业发展水平、乡村建设水平、乡村治理水平。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                        <a href="https://www.gov.cn/gongbao/2024/issue_11186/202402/content_6934551.html" target="_blank">《中共中央 国务院关于学习运用"千村示范、万村整治"工程经验有力有效推进乡村全面振兴的意见》（2024年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2023</div>
+                    <h3>中央一号文件：加快建设农业强国</h3>
+                    <p>加强农业基础设施建设，强化农业科技和装备支撑，巩固拓展脱贫攻坚成果，推动乡村产业高质量发展。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/content/2023/content_5743582.htm" target="_blank">《关于做好2023年全面推进乡村振兴重点工作的意见》（2023年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2022</div>
+                    <h3>中央一号文件：全面推进乡村振兴重点工作</h3>
+                    <p>牢牢守住保障国家粮食安全和不发生规模性返贫两条底线，扎实有序推进乡村发展、乡村建设、乡村治理，推动乡村振兴取得新进展。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                         <a href="https://www.gov.cn/gongbao/content/2022/content_5678065.htm" target="_blank">《中共中央 国务院关于做好2022年全面推进乡村振兴重点工作的意见》（2022年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2021</div>
+                    <h3>脱贫攻坚取得全面胜利</h3>
+                    <p>现行标准下9899万农村贫困人口全部脱贫，832个贫困县全部摘帽，12.8万个贫困村全部出列，创造了人类减贫史上的伟大奇迹。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                             <a href="https://www.gov.cn/gongbao/content/2021/content_5591401.htm" target="_blank">《中共中央 国务院关于全面推进乡村振兴加快农业农村现代化的意见》（2021年中央一号文件）</a >
+                             <a href="https://www.gov.cn/zhengce/2021-04/06/content_5597952.htm" target="_blank">《人类减贫的中国实践》白皮书</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2020</div>
+                    <h3>中央一号文件：抓好"三农"领域重点工作 确保如期实现全面小康</h3>
+                    <p>对标全面建成小康社会目标，集中力量完成打赢脱贫攻坚战和补上全面小康"三农"领域突出短板两大重点任务。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/content/2020/content_5480477.htm" target="_blank">《中共中央 国务院关于抓好"三农"领域重点工作确保如期实现全面小康的意见》（2020年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2019</div>
+                    <h3>中央一号文件：坚持农业农村优先发展</h3>
+                    <p>坚持农业农村优先发展总方针，以实施乡村振兴战略为总抓手，对标全面建成小康社会"三农"工作必须完成的硬任务。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/content/2019/content_5370837.htm" target="_blank">《中共中央 国务院关于坚持农业农村优先发展做好"三农"工作的若干意见》（2019年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2018</div>
+                    <h3>中央一号文件：实施乡村振兴战略</h3>
+                    <p>党的十九大后首个中央一号文件，对统筹推进农村经济建设、政治建设、文化建设、社会建设、生态文明建设和党的建设作出全面部署。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                          <a href="https://www.gov.cn/zhengce/2018-02/04/content_5263807.htm" target="_blank">《中共中央 国务院关于实施乡村振兴战略的意见》（2018年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                                        <div class="timeline-year">2017</div>
+                    <h3>中央一号文件：深入推进农业供给侧结构性改革</h3>
+                    <p>以推进农业供给侧结构性改革为主线，加快培育农业农村发展新动能。同年党的十九大提出实施乡村振兴战略。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/content/2017/content_5171274.htm" target="_blank">《中共中央 国务院关于深入推进农业供给侧结构性改革加快培育农业农村发展新动能的若干意见》（2017年中央一号文件）</a >
+                            <a href="https://www.gov.cn/zhuanti/2017-10/27/content_5234876.htm" target="_blank">党的十九大报告（乡村振兴战略）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2016</div>
+                    <h3>中央一号文件：落实发展新理念 加快农业现代化</h3>
+                    <p>用发展新理念破解"三农"新难题，推进农业供给侧结构性改革，加快转变农业发展方式，保持农业稳定发展和农民持续增收。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/content/2016/content_5045927.htm " target="_blank">《中共中央 国务院关于落实发展新理念加快农业现代化实现全面小康目标的若干意见》（2016年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+                  <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2015</div>
+                    <h3>中央一号文件：加大改革创新力度 加快农业现代化建设</h3>
+                    <p>围绕建设现代农业，加快转变农业发展方式，在提高粮食生产能力上挖掘新潜力，在优化农业结构上开辟新途径。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/xinwen/2015-02/01/content_2813331.htm" target="_blank">《中共中央 国务院关于加大改革创新力度加快农业现代化建设的若干意见》（2015年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2014</div>
+                    <h3>中央一号文件：全面深化农村改革 加快推进农业现代化</h3>
+                    <p>坚决破除体制机制弊端，坚持农业基础地位不动摇，加快推进农业现代化，让广大农民平等参与现代化进程、共同分享现代化成果。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/content/2014/content_2574736.htm" target="_blank">《中共中央 国务院关于全面深化农村改革加快推进农业现代化的若干意见》（2014年中央一号文件）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-year">2013</div>
+                    <h3>精准扶贫方略</h3>
+                    <p>习近平总书记提出"实事求是、因地制宜、分类指导、精准扶贫"的重要方略，开启脱贫攻坚新征程。</p >
+                    <div class="policy-doc-ref">
+                        <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                        <div class="policy-doc-list">
+                            <a href="https://www.gov.cn/gongbao/content/2014/content_2580976.htm" target="_blank">《关于创新机制扎实推进农村扶贫开发工作的意见》</a >
+                            <a href="https://jhsjk.people.cn/article/23442199" target="_blank">习近平总书记湖南考察重要讲话（首次提出精准扶贫）</a >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- 政策亮点 -->
+        <div class="policy-highlights">
+            <div class="policy-card">
+                <div class="policy-icon">💰</div>
+                <h3>种粮补贴</h3>
+                <p>耕地地力保护补贴、农机购置补贴、种粮农民一次性补贴，多项补贴保障种粮收益。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="http://www.mof.gov.cn/zcsjtsgb/gfxwj/201505/t20150513_3583345.htm " target="_blank">《关于调整完善农业三项补贴政策的指导意见》</a >
+                    </div>
+                </div>
+            </div>
+            <div class="policy-card">
+                <div class="policy-icon">🏥</div>
+                <h3>医疗保障</h3>
+                <p>城乡居民基本医疗保险全覆盖，大病保险起付线降低，农村贫困人口住院费用报销比例达80%以上。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="https://www.nhsa.gov.cn/art/2023/7/28/art_53_11109.html" target="_blank">《关于做好2023年城乡居民基本医疗保障工作的通知》</a >
+                    </div>
+                </div>
+            </div>
+            <div class="policy-card">
+                <div class="policy-icon">🏫</div>
+                <h3>教育扶贫</h3>
+                <p>义务教育有保障，"两免一补"政策全覆盖，农村学生营养改善计划惠及3700万学生。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="https://www.gov.cn/zhengce/zhengceku/2022-11/11/content_5726234.htm" target="_blank">《农村义务教育学生营养改善计划实施办法》</a >
+                    </div>
+                </div>
+            </div>
+            <div class="policy-card">
+                <div class="policy-icon">🏠</div>
+                <h3>危房改造</h3>
+                <p>农村危房改造补助政策，让困难群众住上安全房，累计改造危房2560万户。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="https://www.gov.cn/zhengce/zhengceku/2021-04/21/content_5601098.htm" target="_blank">《关于做好农村低收入群体等重点对象住房安全保障工作的实施意见》</a >
+                    </div>
+                </div>
+            </div>
+            <div class="policy-card">
+                <div class="policy-icon">🛡️</div>
+                <h3>农业保险</h3>
+                <p>中央财政对农业保险给予保费补贴，覆盖三大主粮、生猪等重要农产品，为农民撑起"保护伞"。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="https://www.gov.cn/zhengce/zhengceku/2019-12/03/content_5458076.htm" target="_blank">《关于加快农业保险高质量发展的指导意见》</a >
+                    </div>
+                </div>
+            </div>
+            <div class="policy-card">
+                <div class="policy-icon">🏭</div>
+                <h3>产业帮扶</h3>
+                <p>支持脱贫地区发展特色产业，推进农产品加工、乡村旅游、农村电商等新业态融合发展。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="https://www.gov.cn/zhengce/content/2019-06/28/content_5404170.htm" target="_blank">《关于促进乡村产业振兴的指导意见》</a >
+                    </div>
+                </div>
+            </div>
+            <div class="policy-card">
+                <div class="policy-icon">📡</div>
+                <h3>数字乡村</h3>
+                <p>推进农村5G网络、电商物流、智慧农业建设，弥合城乡数字鸿沟，让数字化赋能乡村振兴。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="https://www.gov.cn/gongbao/content/2019/content_5395476.htm" target="_blank">《数字乡村发展战略纲要》</a >
+                    </div>
+                </div>
+            </div>
+            <div class="policy-card">
+                <div class="policy-icon">🎓</div>
+                <h3>人才振兴</h3>
+                <p>培养高素质农民、农村创业带头人，鼓励大学生、退役军人返乡创业，为乡村振兴注入人才活水。</p >
+                <div class="policy-doc-ref">
+                    <button class="policy-doc-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')">📄 中央文件参考 <span class="arrow">▶</span></button>
+                    <div class="policy-doc-list">
+                        <a href="https://www.gov.cn/gongbao/content/2021/content_5591402.htm" target="_blank">《关于加快推进乡村人才振兴的意见》</a >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 农业专栏 -->
+<section id="agri-importance" class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">📖 农业专栏</div>
+            <h2 class="section-title">大国根基 · 农业为本</h2>
+            <p class="section-desc">农业是立国之本、强国之基，深刻理解农业对中国的战略意义</p >
+        </div>
+        <div class="articles">
+            <article class="article-card featured">
+                <div class="article-img" style="background:url('./images/02-farmland-harvest/rice-terrace.jpg') center/cover no-repeat;">
+                    <span class="article-img-emoji">🌾</span>
+                </div>
+                <div class="article-body">
+                    <span class="article-tag">深度</span>
+                    <h3>粮食安全：国之大者的战略底线</h3>
+                    <p>中国用占世界9%的耕地和6%的淡水资源，养育了世界近20%的人口。粮食安全是"国之大者"，是维护国家安全的重要基石。习近平总书记强调："中国人的饭碗任何时候都要牢牢端在自己手中，饭碗主要装中国粮。"</p >
+                    <p>从2004年到2024年，中央连续二十一年发布以"三农"为主题的一号文件，这在新中国历史上绝无仅有。粮食产量连续9年稳定在1.3万亿斤以上，人均粮食占有量超过490公斤，高于国际公认的400公斤安全线。</p >
+                    <p>但我们必须清醒认识到：我国耕地面积有限，水资源时空分布不均，种业核心技术仍有差距。保障粮食安全，既要保数量，更要保质量、保多样，牢牢守住18亿亩耕地红线，深入实施种业振兴行动，强化农业科技支撑。</p >
+                    <button class="article-expand" data-article="grain-security">阅读全文 →</button>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="article-body">
+                    <span class="article-tag">政策</span>
+                    <h3>中国共产党助农举措的历史逻辑与实践成就</h3>
+                    <p>从土地革命"打土豪分田地"到家庭联产承包责任制，从取消农业税到脱贫攻坚，中国共产党始终把农民利益放在首位。</p >
+                    <p>新中国成立以来，党领导人民完成了土地改革，3亿无地少地农民获得7亿亩土地；改革开放率先从农村突破，小岗村"大包干"拉开了改革序幕；2006年全面取消农业税，终结了2600年的"皇粮国税"；2020年脱贫攻坚战取得全面胜利，近一亿人脱贫。</p >
+                    <p>进入新时代，党持续推进乡村振兴战略：农村人居环境整治、农村厕所革命、建制村通硬化路通客车、农村饮水安全工程……一项项务实举措，让农村面貌焕然一新，农民生活越来越好。</p >
+                    <button class="article-expand" data-article="cpc-farmer">阅读全文 →</button>
+                </div>
+            </article>
+            <article class="article-card">
+                <div class="article-body">
+                    <span class="article-tag">分析</span>
+                    <h3>农业现代化：中国式现代化的重要基础</h3>
+                    <p>没有农业农村现代化，就没有整个国家现代化。农业现代化是中国式现代化的重要组成部分和基础支撑。</p >
+                    <p>当前，我国农业科技进步贡献率超过63%，农作物耕种收综合机械化率达73%，良种覆盖率超过96%。数字农业、智慧农业加速发展，5G+农业、农业机器人等新技术新装备不断涌现。但与发达国家相比，我国农业劳动生产率仍有差距，农业产业链价值链还需提升。</p >
+                    <p>建设农业强国，要走中国特色农业现代化之路：以科技为支撑提升农业质量效益，以改革为动力激活农村要素资源，以融合为路径拓展农业多种功能，以绿色为导向推动农业可持续发展。</p >
+                    <button class="article-expand" data-article="agri-modern">阅读全文 →</button>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<!-- 青年力量 -->
+<section id="youth" class="section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">💪 青年力量</div>
+            <h2 class="section-title">新青年 · 新农人 · 新作为</h2>
+            <p class="section-desc">乡村振兴，关键在人。新青年是助农事业的生力军和突击队</p >
+        </div>
+        <div class="youth-banner">
+            <div class="youth-quote">
+                <svg class="quote-mark" viewBox="0 0 40 40" fill="#FFDE00"><path d="M10 25c-3 0-5-2-5-5 0-5 4-10 10-12l1 3c-4 2-6 5-6 7 1 0 2 0 3 1 2 1 3 3 3 5 0 3-2 5-5 5zm18 0c-3 0-5-2-5-5 0-5 4-10 10-12l1 3c-4 2-6 5-6 7 1 0 2 0 3 1 2 1 3 3 3 5 0 3-2 5-5 5z"/></svg>
+                <p>青年人要立志做大事，不要立志做大官。到农村去，到祖国最需要的地方去，在乡村振兴的广阔天地中书写无愧于时代的青春篇章。</p >
+            </div>
+        </div>
+        <div class="youth-ways">
+            <div class="way-card" data-way="tech">
+                <div class="way-icon">🎓</div>
+                <h3>科技助农</h3>
+                <p>运用专业知识服务农业：农技推广、品种改良、病虫害远程诊断、农业大数据分析，让科技成为农民增收的"金钥匙"。</p >
+                <div class="way-tags"><span>农技员</span><span>科技特派员</span><span>数字农业</span></div>
+            </div>
+            <div class="way-card" data-way="ecommerce">
+                <div class="way-icon">📱</div>
+                <h3>电商惠农</h3>
+                <p>打通农产品上行通道：直播带货、社区团购、品牌打造、供应链优化，帮助优质农产品走出大山、走向全国。</p >
+                <div class="way-tags"><span>直播带货</span><span>农村电商</span><span>品牌运营</span></div>
+            </div>
+            <div class="way-card" data-way="culture">
+                <div class="way-icon">🎨</div>
+                <h3>文化兴农</h3>
+                <p>挖掘乡村文化价值：非遗传承、文创开发、乡村旅游策划、乡村美学营造，让乡村"望得见山、看得见水、记得住乡愁"。</p >
+                <div class="way-tags"><span>乡村设计</span><span>文创开发</span><span>文旅策划</span></div>
+            </div>
+            <div class="way-card" data-way="volunteer">
+                <div class="way-icon">🤝</div>
+                <h3>志愿帮农</h3>
+                <p>投身志愿服务一线：大学生支教、三下乡实践、西部计划、驻村帮扶，用青春温度温暖每一寸乡土。</p >
+                <div class="way-tags"><span>三下乡</span><span>西部计划</span><span>驻村帮扶</span></div>
+            </div>
+            <div class="way-card" data-way="startup">
+                <div class="way-icon">🏠</div>
+                <h3>返乡创业</h3>
+                <p>回到家乡建设家乡：家庭农场、农民合作社、乡村企业，享受创业扶持政策，在家乡实现人生价值。</p >
+                <div class="way-tags"><span>家庭农场</span><span>创业补贴</span><span>返乡人才</span></div>
+            </div>
+            <div class="way-card" data-way="planning">
+                <div class="way-icon">📐</div>
+                <h3>规划建农</h3>
+                <p>参与乡村规划建设：村庄规划、民居设计、基础设施改善，用专业能力让乡村更宜居更美丽。</p >
+                <div class="way-tags"><span>村庄规划</span><span>建筑设计</span><span>基础设施</span></div>
+            </div>
+</section>
+
+<!-- 青年案例展示 -->
+<section id="youth-cases" class="section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">📚 青年案例</div>
+            <h2 class="section-title">新农人 · 新故事 · 新启发</h2>
+            <p class="section-desc">真实展现青年投身乡村振兴的奋斗故事，汲取榜样力量</p >
+        </div>
+        <div class="stories-grid" id="cases-grid">
+        </div>
+    </div>
+</section>
+
+<!-- 分享实例 -->
+<section id="share-story" class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">✨ 分享实例</div>
+            <h2 class="section-title">你的故事 · 我们的力量</h2>
+            <p class="section-desc">分享你在乡村振兴中的经历、照片和视频，让更多人看到你的努力</p >
+        </div>
+        
+        <div class="share-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="share-title">标题</label>
+                    <input type="text" id="share-title" placeholder="请输入故事标题">
+                </div>
+                <div class="form-group">
+                    <label for="share-category">分类</label>
+                    <select id="share-category">
+                        <option value="tech">科技助农</option>
+                        <option value="ecommerce">电商惠农</option>
+                        <option value="culture">文化兴农</option>
+                        <option value="volunteer">志愿帮农</option>
+                        <option value="startup">返乡创业</option>
+                        <option value="planning">规划建农</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="share-content">故事内容</label>
+                <textarea id="share-content" rows="6" placeholder="请详细讲述你的故事..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="share-media">上传照片/视频链接</label>
+                <input type="text" id="share-media" placeholder="请输入图片或视频的URL地址">
+            </div>
+            
+            <div class="form-group">
+                <label for="share-name">你的名字</label>
+                <input type="text" id="share-name" placeholder="请输入你的姓名或昵称">
+            </div>
+            
+            <button class="submit-btn" id="submit-share">分享我的故事</button>
+        </div>
+        
+        <div class="shared-stories" id="shared-stories">
+            <h3>大家的分享</h3>
+            <div class="stories-list" id="stories-list">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 农民风采 -->
+<section id="stories" class="section section-alt">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">🌟 农民风采</div>
+            <h2 class="section-title">劳动最光荣 · 奋斗最幸福</h2>
+            <p class="section-desc">每一个勤劳的身影都值得被看见，每一份耕耘都孕育着希望</p>
+        </div>
+        <div class="stories-grid">
+            <div class="story-card" data-story="grain">
+                <div class="story-img" style="background:url('./images/02-farmland-harvest/wheat-harvest.jpg') center/cover no-repeat;">
+                    <span class="story-emoji">👨‍🌾</span>
+                </div>
+                <div class="story-body">
+                    <h3>怀柔麦田里的"云端课堂"</h3>
+                    <p>北京市怀柔区桥梓镇平义分村种粮大户王志明，靠着市区镇三级联动的技术帮扶和"永不掉线"的微信群，把小麦种成了超预期的丰收季。</p>
+                    <span class="story-tag">🌾 种粮大户</span>
+                </div>
+            </div>
+            <div class="story-card" data-story="ecommerce">
+                <div class="story-img" style="background:url('./images/04-farmers-life/farmer-market.jpg') center/cover no-repeat;">
+                    <span class="story-emoji">👩‍🍳</span>
+                </div>
+                <div class="story-body">
+                    <h3>大棚里飞出的"网红产品"</h3>
+                    <p>北京市大兴区安定镇陈山山带着乡亲种桑养蚕、研发桑叶茶，又一头扎进直播间，首场直播成交额就突破13万元。</p>
+                    <span class="story-tag">📱 电商达人</span>
+                </div>
+            </div>
+            <div class="story-card" data-story="startup">
+                <div class="story-img" style="background:url('./images/07-digital-agriculture/technology-farm.jpg') center/cover no-repeat;">
+                    <span class="story-emoji">👨‍🔬</span>
+                </div>
+                <div class="story-body">
+                    <h3>从时尚妈妈到农场主理人</h3>
+                    <p>怀柔新农人马海荣把一座有机农场做成了亲子农业教育基地，凭HiMaMa锦会农场项目拿下北京市农村创业创新大赛第一名。</p>
+                    <span class="story-tag">🔬 返乡创业</span>
+                </div>
+            </div>
+            <div class="story-card" data-story="teacher">
+                <div class="story-img" style="background:url('./images/04-farmers-life/traditional-farming.jpg') center/cover no-repeat;">
+                    <span class="story-emoji">👩‍🏫</span>
+                </div>
+                <div class="story-body">
+                    <h3>扎根曹家路的三尺讲台</h3>
+                    <p>北京市曹家路村曹家路中学教师张怀丰多年坚守山区教育岗位，入选光明网、央视联合主办的"寻找最美乡村教师"公益活动。</p>
+                    <span class="story-tag">📚 乡村教师</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 鼓舞区 -->
+<section class="inspire">
+    <div class="inspire-bg">
+        <div class="inspire-stars">★ ★ ★ ★ ★</div>
+    </div>
+    <div class="container">
+        <h2 class="inspire-title">相信农民的日子一定会越来越好</h2>
+        <p class="inspire-desc">在党的领导下，亿万农民正阔步走在共同富裕的大路上。<br>每一滴汗水都不会白流，每一份付出终将收获希望。</p >
+        <div class="inspire-counter">
+            <div class="counter-item">
+                <span class="counter-num" data-target="9899">0</span><span class="counter-unit">万人</span>
+                <span class="counter-label">脱贫人口</span>
+            </div>
+            <div class="counter-item">
+                <span class="counter-num" data-target="13908">0</span><span class="counter-unit">亿斤</span>
+                <span class="counter-label">粮食年产量</span>
+            </div>
+            <div class="counter-item">
+                <span class="counter-num" data-target="20133">0</span><span class="counter-unit">元</span>
+                <span class="counter-label">农村居民人均可支配收入</span>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 网页最下方的“渠道共享”栏目 -->
+<section id="channel-share" class="section channel-share">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">🤝 渠道共享</div>
+            <h2 class="section-title">农货渠道 · 全台互通</h2>
+            <p class="section-desc">打破信息壁垒！自由选择农产大类，共享农户与经销商对接通道，全平台互通可见。</p>
+        </div>
+
+        <div class="share-layout">
+            <!-- 左侧：种类选择区 -->
+            <div class="share-left">
+                <h3><span style="color:#DE2910;">1.</span> 选择农产品种类</h3>
+                <div class="type-grid">
+                    <button class="type-btn active" data-type="粮食">
+                        <span class="btn-icon">🌾</span>
+                        <span>粮食</span>
+                    </button>
+                    <button class="type-btn" data-type="水果">
+                        <span class="btn-icon">🍎</span>
+                        <span>水果</span>
+                    </button>
+                    <button class="type-btn" data-type="蔬菜">
+                        <span class="btn-icon">🥬</span>
+                        <span>蔬菜</span>
+                    </button>
+                    <button class="type-btn" data-type="鲜活农产品">
+                        <span class="btn-icon">🐟</span>
+                        <span>鲜活农产品</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 右侧：联系信息输入区 -->
+            <div class="share-right">
+                <div>
+                    <h3><span style="color:#DE2910;">2.</span> 完善发布人与联系信息</h3>
+                    <form id="share-form" onsubmit="return false;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="share-name">联系人姓名 / 农场商号</label>
+                                <input type="text" id="share-name" placeholder="例如：老张生态果园 / 顺发商贸" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="share-identity">发布者身份标记</label>
+                                <select id="share-identity" required>
+                                    <option value="农户" selected>👨‍🌾 优质农户 (一手货源)</option>
+                                    <option value="经销商">🚛 渠道经销商 (收购/销货)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="share-phone">手机号码</label>
+                                <input type="tel" id="share-phone" placeholder="请输入11位手机号" pattern="^1[3-9]\d{9}$" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="share-wechat">微信号 (选填)</label>
+                                <input type="text" id="share-wechat" placeholder="请输入微信号，方便一键复制">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-clear-data" id="btn-clear">清空看板数据</button>
+                    <button type="button" class="btn-submit" id="btn-submit">同步共享至全平台</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下方：全平台动态共享可见看版 -->
+        <div class="share-board">
+            <div class="board-header">
+                <h4>🌐 实时全平台共享数据中心（全国互通）</h4>
+                <div>
+                    <span class="board-count" id="board-count">已同步：0 条数据</span>
+                </div>
+            </div>
+            <!-- 共享信息动态渲染卡片槽 -->
+            <div class="info-grid" id="info-container">
+                <!-- 动态数据插入 -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 页脚 -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <svg class="footer-emblem" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#DE2910" stroke="#FFDE00" stroke-width="3"/><g transform="translate(50,50)"><g fill="#FFDE00"><path d="M-5,-30 L5,-30 L5,5 L-5,5Z"/><path d="M-3,-32 L3,-32 L0,-38Z"/><rect x="-20" y="-5" width="40" height="5" rx="1"/><path d="M18,-8 L28,-18 L30,-16 L20,-6Z"/><path d="M20,-4 Q30,-8 32,-2 Q34,4 24,2Z"/></g><g fill="#FFDE00" transform="scale(-1,1)"><path d="M18,-8 L28,-18 L30,-16 L20,-6Z"/><path d="M20,-4 Q30,-8 32,-2 Q34,4 24,2Z"/></g><circle cx="0" cy="-10" r="6" fill="#FFDE00"/></g></svg>
+                <div>
+                    <div class="footer-title">红色助农平台</div>
+                    <div class="footer-motto">兴农强国 · 共同富裕</div>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="#red-courses">红课学习</a>
+                <a href="#farming-tech">农技课堂</a>
+                <a href="#policies">助农政策</a>
+                <a href="#agri-importance">农业专栏</a>
+                <a href="#youth">青年力量</a>
+                <a href="#stories">农民风采</a>
+                <a href="#channel-share">渠道共享</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>☭ 红色助农平台 — 传播红色思想，助力乡村振兴</p>
+            <p class="footer-note">本平台内容仅供学习交流，视频资源来源于互联网公开平台</p>
+        </div>
+    </div>
+</footer>
+
+<!-- 视频弹窗 -->
+<div id="video-modal" class="modal hidden">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close">&times;</button>
+        <div id="modal-player"></div>
+        <div id="modal-info"></div>
+    </div>
+</div>
+
+<!-- 文章弹窗 -->
+<div id="article-modal" class="modal hidden">
+    <div class="modal-overlay" id="article-overlay"></div>
+    <div class="modal-content article-modal-content">
+        <button class="modal-close" id="article-close">&times;</button>
+        <article id="article-detail"></article>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // ==================== 学习记录管理 ====================
+        const studyRecord = {
+            videoSeconds: 0,
+            articleSeconds: 0,
+            timerInterval: null,
+            currentType: null,
+
+            init() {
+                const saved = JSON.parse(localStorage.getItem('study_record') || '{"videoSeconds":0,"articleSeconds":0}');
+                this.videoSeconds = saved.videoSeconds || 0;
+                this.articleSeconds = saved.articleSeconds || 0;
+                this.updateDisplay();
+
+                document.getElementById('study-toggle').addEventListener('click', () => {
+                    document.getElementById('study-panel').classList.toggle('show');
+                });
+                document.addEventListener('click', (e) => {
+                    const panel = document.getElementById('study-panel');
+                    const toggle = document.getElementById('study-toggle');
+                    if (!panel.contains(e.target) && e.target !== toggle) {
+                        panel.classList.remove('show');
+                    }
+                });
+            },
+
+            startTimer(type) {
+                this.stopTimer();
+                this.currentType = type;
+                this.timerInterval = setInterval(() => {
+                    if (this.currentType === 'video') this.videoSeconds++;
+                    else if (this.currentType === 'article') this.articleSeconds++;
+                    this.updateDisplay();
+                    this.save();
+                }, 1000);
+            },
+
+            stopTimer() {
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                    this.timerInterval = null;
+                }
+                this.currentType = null;
+            },
+
+            getTotalScore() {
+                return Math.floor(this.videoSeconds / 60) + Math.floor(this.articleSeconds / 60);
+            },
+
+            updateDisplay() {
+                document.getElementById('video-time').textContent = Math.floor(this.videoSeconds / 60) + '分钟';
+                document.getElementById('article-time').textContent = Math.floor(this.articleSeconds / 60) + '分钟';
+                document.getElementById('total-score').textContent = this.getTotalScore();
+            },
+
+            save() {
+                localStorage.setItem('study_record', JSON.stringify({
+                    videoSeconds: this.videoSeconds,
+                    articleSeconds: this.articleSeconds
+                }));
+            }
+        };
+        studyRecord.init();
+        // 导航切换
+        const navToggle = document.getElementById('nav-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        // 导航链接点击后关闭菜单
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+            });
+        });
+
+        // 滚动时导航栏样式变化
+        const header = document.getElementById('top-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 平滑滚动到锚点
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 导航高亮
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 农技课堂标签切换
+        const techTabs = document.querySelectorAll('.tech-tab');
+        const techPanels = document.querySelectorAll('.tech-panel');
+
+        techTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 移除所有激活状态
+                techTabs.forEach(t => t.classList.remove('active'));
+                techPanels.forEach(p => p.classList.remove('active'));
+                
+                // 添加当前激活状态
+                tab.classList.add('active');
+                const targetPanel = document.getElementById(`tab-${tab.dataset.tab}`);
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                }
+            });
+        });
+
+        // 视频弹窗
+        const videoModal = document.getElementById('video-modal');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalClose = document.getElementById('modal-close');
+        const modalPlayer = document.getElementById('modal-player');
+        const modalInfo = document.getElementById('modal-info');
+
+       
+                const videoCards = document.querySelectorAll('.video-card');
+        videoCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const videoLink = card.dataset.link;
+                const videoLinks = card.dataset.links;
+                const coverBg = card.querySelector('.video-cover').style.backgroundImage;
+                const videoName = card.querySelector('.video-name').textContent;
+                const videoInfo = card.querySelector('.video-info').textContent;
+                
+                let videoImg = 'default.jpg';
+                if (videoName.includes('建党伟业')) {
+                    videoImg = './party2.jpg';
+                } else if (videoName.includes('袁隆平')) {
+                    videoImg = './yuanlongping2.jpg';
+                } else if (videoName.includes('脱贫攻坚')) {
+                    videoImg = './fight against poverty2.jpg';
+                } else if (videoName.includes('长征')) {
+                    videoImg = './the long march2.jpg';
+                } else if (videoName.includes('超级稻高产')) {
+                    videoImg = './chaojidaogaochan2.jpg';
+                }else if (videoName.includes('玉米密植')) {
+                    videoImg = './yumi2.jpg';
+                } else if (videoName.includes('温室大棚')) {
+                    videoImg = './wenshidapeng2.jpg';
+                } else if (videoName.includes('大马力拖拉机')) {
+                    videoImg = './tuolaji2.jpg';
+                } else if (videoName.includes('植保无人机')) {
+                    videoImg = './drone2.jpg';
+                } else if (videoName.includes('联合收割机')) {
+                    videoImg = './lianheshougeji2.jpg';
+                }else if (videoName.includes('肉牛科学饲养')) {
+                    videoImg = './rouniu2.jpg';
+                } else if (videoName.includes('林下生态养鸡')) {
+                    videoImg = './yangji2.jpg';
+                } else if (videoName.includes('稻渔综合种养')) {
+                    videoImg = './daoyuzonghe2.jpg';
+                } else if (videoName.includes('循环农业')) {
+                    videoImg = './xunhuannongye2.jpg';
+                } else if (videoName.includes('有机农产品')) {
+                    videoImg = './youjinongchanping2.jpg';
+                }else if (videoName.includes('休闲农业')) {
+                    videoImg = './xiuxiannongye2.jpg';
+                }
+                let playerHtml = videoImg ? `
+                    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:#000;">
+                        <img src="${videoImg}" style="width:100%;height:100%;object-fit:cover;" alt="${videoName}">
+                    </div>
+                ` : `
+                    <div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a1a,#2d2d2d);">
+                        <div style="text-align:center;color:rgba(255,255,255,0.6);">
+                            <div style="font-size:48px;margin-bottom:12px;">📺</div>
+                            <div style="font-size:14px;">点击下方按钮前往B站观看</div>
+                        </div>
+                    </div>
+                `;
+                
+                let infoHtml = `
+                    <h3 style="font-size:20px;color:#1a1a1a;margin-bottom:8px;">${videoName}</h3>
+                    <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:16px;">${videoInfo}</p >
+                `;
+                
+                // 多链接模式
+                if (videoLinks) {
+                    try {
+                        const links = JSON.parse(videoLinks);
+                        infoHtml += `<div style="border-top:1px solid #eee;padding-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">`;
+                        links.forEach(item => {
+                            infoHtml += `
+                                <a href="${item.url}" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#FB7299,#FF6699);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600;font-size:13px;box-shadow:0 4px 12px rgba(251,114,153,0.25);transition:all 0.3s ease;">
+                                    📺 ${item.title}
+                                </a >
+                            `;
+                        });
+                        infoHtml += `</div>`;
+                    } catch(e) {}
+                }
+                // 单链接模式
+                else if (videoLink) {
+                    infoHtml += `
+                        <div style="text-align:right;border-top:1px solid #eee;padding-top:16px;">
+                            <a href="${videoLink}" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#FB7299,#FF6699);color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 4px 15px rgba(251,114,153,0.3);">
+                                📺 去B站观看完整视频
+                            </a >
+                        </div>
+                    `;
+                } else {
+                    infoHtml += `
+                        <div style="text-align:right;border-top:1px solid #eee;padding-top:16px;">
+                            <span style="color:#999;font-size:13px;">视频链接待添加</span>
+                        </div>
+                    `;
+                }
+                modalPlayer.innerHTML = playerHtml;
+                modalInfo.innerHTML = infoHtml;
+                videoModal.classList.remove('hidden');
+                studyRecord.startTimer('video');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeVideoModal = () => {
+            videoModal.classList.add('hidden');
+            modalPlayer.innerHTML = '';
+            document.body.style.overflow = '';
+            studyRecord.stopTimer('video');
+        };
+
+        modalClose.addEventListener('click', closeVideoModal);
+        modalOverlay.addEventListener('click', closeVideoModal);
+
+        // 青年案例数据
+        const youthCasesData = {
+            'tech': [
+                {title:"90后海归博士的稻田实验室",content:"潘新星：为田地植入“智能芯”！人工智能博士回乡当水稻“CEO”。清晨的浠水田野，薄雾未散。田间传感器规律低鸣，实时数据流无声淌过。85后海归人工智能博士、浠水县长福农业产业化综合服务有限公司董事长潘新星俯身，指尖拂过稻叶上的露珠——他在数字与泥土之间，校准着智慧农业的刻度。五年前，父亲骤然离世，将5500亩稻田的未来交到他手中。乡亲们曾疑惑：这个穿西装、盯屏幕的年轻人，真能读懂脚下的土地吗？潘新星以行动回应。他将算法思维植入农田，以无人机为“天眼”，为土地装上“数字大脑”。\n\n如今，1.2万亩丘陵稻田，在他的“智慧农业大田管理系统”调度下，生长节律与数据流同步，实现精准种植、高效管理。这位新时代的“智慧农人”，荣获“湖北省五一劳动奖章”“黄冈十佳农民”“黄冈青年五四奖章”等多项荣誉。然而，现实给了他一个“下马威”。博士种田，是不折不扣的“门外汉”——他连水稻有多少品种都分不清；想拜村里的老师傅学艺，也被婉拒。出人意料的是，这位“洋博士”没有退缩。他放下身段，从最琐碎的打杂跑腿做起，硬是用双脚把合作社5000多亩地丈量了一遍。日复一日，他不仅逐渐摸清了水稻的特性，更用这份踏实，赢得了乡亲们的信任与支持。一年光阴，田埂之上，他心中关于这片土地的崭新图景，已悄然萌芽。一个智慧的“数智大脑”他为“望天田”开出精准“数据处方”刚回村时，潘新星时常独自在田埂上徘徊。眼前，是家乡丘陵地带“散、小、广”的耕地格局，管理粗放，效率低下。“我的AI专业，该如何在这片土地上落地生根？”他不断自问这位人工智能博士看到的，不只是眼前的地块。他观察到，湖北省八成土地是丘陵山地，仅两成为平原湖区。“如果能用科学手段，把这80%的‘边角地’种好、种满、种足，会是多大的潜能？”一个发展智慧农业、重塑生产模式的构想，在他心中清晰起来。\n\n然而现实严峻。合作社那5500亩田地，困于“靠天吃饭”的循环。地块零碎，水源不均，老社员们面对中低产田，只能无奈摇头。潘新星没有贸然行动，而是像对待一个复杂的算法命题一样——先俯身收集“原始数据”。他踏遍每一块田，用手机记录墒情，在本子上标记差异，将世代口耳相传的农耕经验，悉数转化为可被分析、优化的数字信息。无数个夜晚，乡村的寂静被规律的键盘声轻轻叩破。他尝试着，为这片遵循千年节律的土地，编写一套崭新的“生长逻辑”。最终，他将5500亩地“数字化解构”为367个独立管理单元，为每一片田建立专属的电子档案。何时灌溉、施何种肥、用量几何，全由“数字农田大脑”开出精准“处方”。这套逻辑首先在一块公认的“废地”上得到验证。潘新星调出数据分析后，力排众议，将一块贫瘠水田改种耐旱的再生高粱。当无人机如“天眼”巡弋，数据驱动精准滴灌，昔日的“望天田”焕发出勃勃生机。秋收时节，结果让所有人心服口服。亩产高达1400斤，比往年的水稻增产七成。“过去是‘人看天’，现在成了‘天助人’！”村民潘自红抚摸着饱满的高粱穗，满脸笑意。曾经不抱希望的中低产田，第一次有了丰饶的气象。",image:"潘新星.jpg,潘新星2.jpg",author:"湖北日报"},
+                {title:"AI病虫害诊断平台",content:"2018年，刘奕辰团队跟随团衡阳市委，在衡阳县曲兰镇搞驻村扶贫产业，做得颇有声色。但他发现各地农业普遍存在农药残留超标的问题，瓜果蔬菜尤甚。多处调研后，他了解到这并非个别区域的问题，而是普遍存在的“老大难”。其核心原因，不在于有意过量打药，而在于绝大多数农户不具有相应知识，其施药操作频次和数量来源于农药销售者的指引。而后者本身带有天然的趋利性。此外，由于基层农技人员匮乏，农户对于各种病虫害多不知情，也难以做到“对症下药”“有的放矢”。更有甚者，还买错了农药。“我们走访很多农户，稻子都割完了，家里还剩下不少农药。有的瓜果本来只需打两次，他们却打了四五次。”刘奕辰在采访中告诉记者，现实的矛盾让自己萌生了一个念头：建立一个大数据库，打造一名“植物医生”，不仅可以帮助农户找准病虫害的问题对症解决，还能减少农药使用，让城里的居民吃得放心。\n\n即便是扎根农村创业的刘奕辰，在种植水稻、黄桃、蟠桃的过程中，也曾深受病虫害识别难、防治难的困扰。刘奕辰团队敏锐地注意到这些问题，并琢磨着一项新技术，能颠覆靠经验“吃饭”的传统模式，让“新手”迅速变身“老把式”，能够更方便快捷地识别病虫害。团队的年轻人习惯了用手机发朋友圈推广产品，搞网上直播带货。移动互联网的妙用让创业者受益无穷，也因此，他们萌发了用手机识别病虫害的创意。因缘巧合之下，他们就此切入大数据和云计算在农业领域的应用。2019年开始，借鉴“植物扫一扫识别”技术，刘奕辰团队依据植物病虫害识别的应用场景，探索开发AI算法，搭建一个包括病虫害图片库、病虫害防治信息库的基础数据库。\n\n出乎意料的是，技术攻关过程中最难的不是AI算法，而是基础数据库的建设。为突破这个难关，刘奕辰团队与母校湖南工学院联合组建了100多人的图像采集队伍，深入田间地头采集各种农作物的病虫害图片。他们还与湖南农业大学、四川农业大学及多个地方农科所合作，在引入病虫害图片库的同时，联合搭建了专业的病虫害防治信息库。“我们集纳了2000万张植物病虫害图片，涵盖水稻、小麦等39种农作物，建立了320多种农作物病虫害模型。”刘奕辰说，通过“算法+数据库”的支持，农户只需将手机镜头对准一株疑似出现病虫害的稻穗，拍照、上传，选择识别植物种类，几秒钟后，手机屏幕便闪现出病虫害图片及介绍文字，并同步匹配防治方案与推荐药物。有复杂成因的，还可以咨询后台的10多位农业专家求解。具体来看，“扫一扫”的过程可以分解为4个步骤：第一步是采集图像，使用手机摄像头拍摄“患病”稻穗的照片，确保照片清晰且包含足够的植物特征，以便系统能够准确识别；第二步是图像处理，拍摄的照片被送入图像处理算法中，提取植物病虫害的关键特征，如叶子颜色、虫洞形状与大小等，用于后续的识别步骤；第三步是数据库匹配，提取了关键特征，系统将与一个包含大量植物病虫害图像和信息的数据库进行比对；第四步是识别和反馈，系统识别出与用户拍摄的植物最匹配的条目，并将结果返回给用户。目前，“植物口袋医生”项目开发出的应用程序对个体用户免费开放，全国有31万人注册使用。“‘植物口袋医生’拥有开源民用病虫害数据库，能够精准识别病虫害，有效降低作物农药残留。”刘奕辰说，他们的技术有效契合了国家的乡村振兴和农业数字化的推进。推广中，即便免费给农户使用，公司仍有生存之道：作为个体的农户多会依据这一系统来甄别、选择农资，由此可以导流相应广告，叠加农业测绘等，足以支持其市场拓展。这一做法得到了衡阳市委组织部门的认可，各个驻村工作队在乡村帮助推广使用，赢得农户们的赞赏。有业内人士指出，这一技术体系得到广泛应用后，有望打开数字农业的一片新蓝海。",image:"刘奕辰.jpg,刘奕辰2.jpg",author:"新华网"}
+            ],
+            'ecommerce': [
+                {title:"直播带货助农千万",content:"随着短视频的兴起，越来越多的年轻人把乡村作为了创作的主战场。\n\n在淄博就有这样一位年轻人， 通过“新农人+村书记 ” 的流量实践，孵化出可复制的乡村带货模式，为农业产业升级注入新动能。在淄博市博山区白塔镇簸箕掌村，村党支部书记刘强正在用手机拍摄短视频，镜头前他侃侃而谈，言语朴实、情真意切。刘强的侃侃而谈，得益于返乡青年岳玉轩的带动。岳玉轩在外深耕电商多年，凭着一腔乡愁，他想让家乡的优质农产品通过短视频走出乡村小天地，这个初衷让岳玉轩结识了簸箕掌村的刘强，他们开始尝试用短视频推广村里的猪头肉。淄博市博山区白塔镇簸萁掌村党总支书记、村委会主任刘强说：“接触这些新生事物信心特别不足。他几次做我工作，给我鼓劲鼓励，5月4日做了第一个短视频，没想到第一个短视频，就把咱簸箕掌村的猪头肉推出来了，非常火爆。”山东青丘影业有限公司总经理岳玉轩说：“当时这一条是到了47万的一个播放量，一夜之间就把簸箕掌猪头肉炒火了，到了第二天，好多猪头肉的摊子上就人特别多了，当时我们就确定，这条路子能走得通，也能走得成。”短视频的火爆激发了村书记刘强带货的决心。他用一个多月时间，对肉食产品资质、包装、保鲜等方面进行了完善，启动了村里的首场直播。淄博市博山区白塔镇簸萁掌村党总支书记、村委会主任刘强说：“6月28日我第一次进入了直播间，这第一场就卖了7000多块钱，从那以后，咱线上线下把猪头肉就推向全国，今年9月份，我又把咱们这个合作社超市又重新打造起来，这样线下也卖，线上也卖，基本上把这个‘一村一业’就做实了。” 岳玉轩也趁热打铁为簸箕掌村培养了多个主播，带火了各种农产品销售，还破解了玉米滞销的难题。\n\n簸萁掌村案例的成功，岳玉轩很受鼓舞，他带领团队总结出书记先火、产业引流、头雁直播、村民矩阵的四步走发展路径，复制成可推广的模式，接连孵化出包括八陡镇东顶村等一批网红书记，带动各类特色产品陆续出圈。与此同时，白塔镇也出面扶持，搭建起产业链党群服务中心直播服务站，举办电商实战公益培训班，孵化了近百个直播账号。淄博市博山区白塔镇党委委员徐磊说：“一方面是注入了新鲜的活力，带来了不少的年轻人和大学生来这边扎根创业，另一方面，也为我们带来了新的手段，给我们镇上也提供了新的思路，也给我们带来了新的活力。”目前，簸箕掌村村书记刘强的个人账号累计播放量已超3000万，成为博山村播的典型。眼下，村里正计划整合博山全区农产品建设云仓，用网络短视频讲家乡故事，推特色产品。山东青丘影业有限公司总经理岳玉轩说：“我就本着这么一个初心使命，我就觉得，我想用流量帮更多人，所以这个事让我一直能坚持做下去。”",image:"刘强.jpg,刘强2.jpg",author:"山东广播电视台闪电新闻"},
+                {title:"农产品品牌化之路",content:"周至县以猕猴桃特色产业为核心，坚持标准引领、科技赋能、品牌矩阵构建和多渠道推广，通过“三链同构”推动全产业链升级。2025年，周至猕猴桃以75.31亿元的区域公用品牌价值连续11年位列中国猕猴桃类品牌价值榜首，形成“区域公用品牌+企业品牌+产品品牌”协同体系，实现从“有产品无品牌”向百亿级区域公用品牌的跨越。\n\n活动与渠道传播破圈，双轮驱动品牌声量。一是IP活动造势能。连续举办农民猕猴桃丰收节、产业高质量发展论坛、国际猕猴桃文化节、猕猴桃全国产业高新技术论坛、猕猴桃评优大赛等年度活动，结合“水果网络特色季”等线上营销，形成“线下体验+线上传播”的立体推广矩阵，年触达消费群体超千万人次。二是全渠道品牌渗透。在北京、上海等城市布局50余家直营店、20家品牌形象店，依托477家电商企业与超1万户微商构建线上销售网络，2024年周至县成立猕猴桃产销联盟，2024年线上销售额突破25亿元，同步通过跨境电商试水海外市场，强化“中国猕猴桃原产地”品牌辨识度。从区域特产跃升为全国标杆，2023年周至猕猴桃入选第一批全国土特产推荐名录，被纳入“2025年中国果业品牌培育计划”荣登“中国农产品区域公用品牌”百强榜，入选国家地理标志产品保护工程，品牌价值转化为产业招商与乡村振兴的核心竞争力。\n\n产业协同融合创新延伸品牌价值。一是打造全产业链品牌化。打造省级猕猴桃产业融合示范园，构建“种植—加工—科研—观光”一体化链条，开发猕猴桃酒、冻干片、果汁、酵素等精深加工产品，提升品牌附加值，推动综合产值向百亿元目标迈进。二是农旅融合塑品牌文化。挖掘“周山至水”生态资源，推出“赏花采摘+康养体验”农旅项目，举办粤港澳大湾区客商果区行活动，品鉴大赛等活动，将猕猴桃种植基地转化为品牌体验场景，年接待游客超50万人次，实现“农业观光+品牌教育”双重价值输出。通过绿色栽培、有机认证等模式，实现“品牌增值—生态保护—农民增收”良性循环，为特色农产品品牌化提供“周至样板”。",image:"猕猴桃.jpg,猕猴桃2.jpg",author:"陕西乡村振兴"}
+            ],
+            'culture': [
+                {title:"古村落的活化重生",content:"村子里的窗棂非常的有特色，既拥有客家文化的影子，也有广府文化的精髓。”一众艺术家来到增城的旧高埔村，围着村里的特色建筑展开了讨论。古村落是中华文明的“活态基因库”，一砖一瓦皆刻录着农耕文明的生活密码。其价值不仅在于物质遗存，更在于暗藏其中的文化逻辑；活化不仅是保护，更是让传统智慧在现代社会重新生长。3月15日，羊城晚报文化智库主办的“探寻‘百千万’之旅，粤美乡村超带感——小镇观察家采风活动”在广州增城派潭镇开展。派潭镇位于广州市增城区北部，北回归线穿镇而过。全镇森林总面积31.2万亩，森林覆盖率71.67％，现有公园105个，绿化面积约22万平方米，建成绿道约56公里，曾获全国重点镇、全国特色景观旅游名镇、全国美丽宜居小镇、国家卫生镇、中国十大文化休闲旅游镇、全国乡村治理示范镇、广东省乡村民宿示范镇、广东省休闲农业与乡村旅游示范镇、广东省森林小镇等殊荣。派潭镇下辖的上九陂村入选“2023年中国美丽休闲乡村”。派潭镇拥有白水寨国家4A级景区、森林海省级旅游度假区、派潭省级生命健康小镇、大丰门漂流景区等，建成星级标准温泉酒店7家、乡村民宿130余家、专业露营地6家。2023年，全镇接待游客约600万人次，旅游收入超20亿元。\n\n当日，由艺术家、学者、业界专家、媒体记者组成的活动采风团踏上探寻古村落活化之路，来到旧高埔村、邓村村等地，实地走访调研当地古村落活化与文旅产业融合的现状与实践采风团首站抵达广州增城派潭镇旧高埔村，重点考察了具有岭南水乡特色的昌华公祠建筑群。这座被誉为＂水上花园祠堂＂的古建筑，完整保留了广府传统民居的空间格局，成为研究岭南宗祠文化的珍贵样本。旧高埔村作为具有六百年建村史的传统聚落，现存广府民居古建筑群在规模、完整度及原真性等方面均属区域罕见。其中昌华公祠建筑群堪称典范，其砖雕墀头、镬耳山墙与青石巷道共同构建起完整的空间叙事体系，承载着岭南宗族社会的文化记忆。建筑与环境形成的山水格局，更暗含着古人＂天人合一＂的营造智慧。\n\n考察中发现，村内几乎每家每户门前都贴着醒目的手写对联，形成了独特的文化景观，但文字使用现状引发学者关注。广东第二师范学院书法教育研究所所长苏壁郎指出：“这些手写对联大多数都是简、繁体字混用，其中使用的繁体字已经很少了，传统书法技艺与文字学养出现代际断层，形式虽存但文化内涵逐渐消解。＂此外，苏壁郎还指出，“旧高埔村除昌华公祠外的许多古建筑群其实都处于破败废弃的状态，目前仍然具有很大的活化改造价值。”\n\n作为广东省文物古迹活化利用的典型案例，邓村石屋见证着古村涅槃重生的全过程。2015年，在增城区委、区政府的大力支持下，派潭镇启动邓村石屋岭南特色村落建设。通过政企协作模式，将明清时期遗留的祠堂、碉楼及70余间空置民居整体改造，打造出占地3800平方米的精品民宿群落。在建造过程中坚持“修旧如旧”，完整保留客家围屋的夯土墙基、雕花门楣等建筑肌理，同时做到＂新旧共生＂，植入了现代酒店管理体系与沉浸式文化体验，33间主题客房在古建筑中焕发新生，成为广州地区唯一以完整古村落形态运营的精品度假酒店。通过文旅赋能，实现了“空心村”向“网红村”的蜕变。",image:"活化.jpg,活化2.jpg",author:"金羊网"},
+                {title:"非遗传承的青年力量",content:"晚上8点，宁德市蕉城区，畲族民歌传承人雷清梅准时打开账号“畲小仙”。镜头前，她身着缀满银饰的传统凤凰装，一曲高亢婉转的畲歌穿过屏幕，将闽东畲乡的山野气息，送到天南地北的网友眼前。畲族民歌是流行于畲族居住地的传统音乐。2006年，由宁德市申报的畲族民歌经批准列入首批国家级非物质文化遗产名录。出生于1998年的雷清梅，正是这门古老技艺中的一张年轻面孔。“这是以往我做畲族民歌直播时的常态。”雷清梅向记者介绍，如今她的“畲小仙”账号实名认证为非遗畲族民歌代表性传承人，在社交媒体上拥有超10万粉丝，成为闽东畲歌传播的新媒体名片。雷清梅与畲歌的缘分，刻在童年的日常里。“我还够不着锅沿的时候，就听奶奶添柴时哼着调子，爷爷扛锄头下田，歌声也跟着漫过田埂。”她回忆，畲歌于畲家人而言，就像屋前的山雾与溪水，是生活中自然流淌的一部分。但彼时的她，只是懵懂模仿，从未想过要系统传承——这门技艺在老一辈间多靠口口相传，没有成文的教材，更没有规范的教学。改变始于初一那年的课堂。畲族民歌国家级非遗传承人雷美凤老师用粉笔在黑板上一笔一画写下畲语唱词，那是雷清梅第一次见到畲语以文字形式呈现。\n\n“小时候听爷爷奶奶唱歌，要反复琢磨才懂意思，文字让畲歌变得可观可感。”这份新鲜感让她格外专注，课后总壮着胆子向老师请教发音技巧与歌词深意，也由此成为雷美凤的弟子，正式踏上畲歌传承之路。“原以为熟悉畲语就能唱好畲歌，真正学起来才知道难在‘精准’与‘韵味’。”雷清梅坦言，日常畲语交流与歌唱表达截然不同，每一个音节的轻重、每一段旋律的转折，都有严苛讲究。她像初学外语的孩子，在笔记本上用汉字和符号为畲文逐字标注读音，反复默念记忆；面对畲歌高亢嘹亮的唱腔要求，没有专业声乐基础的她，起初只会用“大白嗓”硬顶，唱到喉咙火辣辣地疼，含片润喉糖歇一阵，便又站到老师面前反复打磨。\n\n就这样，凭着笨拙却执拗的热爱，雷清梅的“守艺路”走了16年。“身边的同学换了一批又一批，有人觉得枯燥，有人扛不住辛苦，最后留下的没几个。”雷清梅说，支撑她坚持的，是那些濒临失传的古老曲调，是师父口中畲歌背后的民族故事。“每多学会一首，就像多留住了一段畲族的记忆，这份重量，让我舍不得放弃。”雷清梅的话语里，藏着年轻传承人的执着。\n\n今年1月12日至13日，第二届非遗主题全球春晚在北京举行。雷清梅与老师雷美凤一起登上舞台，身着畲族凤凰装展示，向全球观众介绍了畲族“双音”民歌的艺术特色与文化内涵。从灶台边模仿奶奶哼唱，到如今成为央视舞台上的畲歌传承人，雷清梅的歌声乘着互联网的东风飞出了大山。时间倒回至2016年，彼时在央视节目《中国民歌大会》后台，雷清梅第一次看到有同行在用手机直播。一个念头击中了她：“我们畲歌不也可以通过这个方式让更多的人听到吗？”十年前，直播还是新鲜事物，在本地更是无人尝试。作为本地首个尝试用新媒体方式传播畲歌的人，她曾每天直播长达十几个小时，唱累了就聊畲族乌米饭的习俗、凤凰装的工艺，用最质朴的分享，让这项非遗被更多人看见。如今，她不仅在直播间里向天南地北的网友传唱畲歌，还接过师父的接力棒，开设免费公益课堂，教孩子们认识畲语、演唱畲歌。雷清梅说，她最大的心愿是让更多年轻人听懂畲歌的韵律，让这门古老技艺在代代相传中永不褪色。",image:"非遗.jpg,非遗2.jpg",author:"海峡网"}
+            ],
+            'volunteer': [
+                {title:"西部计划的青春之歌",content:"2024年8月，怀揣“到西部去、到基层去、到祖国最需要的地方去”的初心，王超然作为大学生西部计划志愿者来到巴州焉耆县，扎根基层治理一线。从最初的青涩憧憬到如今的从容坚定，她在服务中不断成长，在奉献中持续升华，用多重身份谱写了一曲属于新时代青年的青春之歌。王超然将政策宣讲视为连接党心民心的桥梁。她打破照本宣科的模式，用群众语言传递政策温度：为老人编创朗朗上口的政策顺口溜，开展“唠嗑式”宣讲；面向青年开设短视频“政策小课堂”，用鲜活案例解读政策。她还主动参与“敲门行动”，深入田间地头和巴扎集市，在帮村民干活、聊家常的过程中答疑解惑，让惠民政策真正走进群众心里。\n\n在乡村文化建设中，王超然精心策划各类接地气、聚人气的文体活动。她组织广场舞展演，邀请专业老师指导，帮助村民登上更广阔舞台；策划乡村趣味运动会，让拔河、羽毛球等项目成为连接邻里的纽带。一场场活动不仅丰富了群众精神生活，更让文明乡风在欢声笑语中悄然生长。作为基层宣传的践行者，王超然以镜头为笔、以平台为纸，真实记录乡村变迁。她通过“温情包尔海”“青春焉耆”等平台，展现政策落实的温暖瞬间；策划“志愿者一日vlog”“青年有话说”等栏目，讲述奋斗故事。她的作品充满烟火气与正能量，让焉耆的乡村之美和青年担当跨越山海，温暖传递。从政策宣讲到文化组织，再到宣传发声，王超然的身份不断转变，但服务基层、奉献群众的初心始终如一。村民专注的眼神、群众灿烂的笑容、网友温暖的留言，都成为她前行的动力。她的成长轨迹，是万千西部计划志愿者扎根西部、奉献青春的生动写照。",image:"西部.jpg,西部2.jpg",author:"巴州共青团"},
+                {title:"三下乡的科技帮扶",content:"田畴铺翠色，夏管正当时。开发区前马陵村小丫家庭农场内，已完成机插的水稻秧苗绿意盎然。田埂之上，两名身着红马甲的农技志愿者正围着一台新型农用无人机，与农场负责人热烈交流飞防作业事宜。“这台新机飞防施肥效果怎么样？今年社会化服务业务如何？”上前询问的带队人，正是市农村专业技术协会秘书长、市农机推广站站长陈新辉。今年53岁的他，近日成功入选中央宣传部办公厅公布的2025年度全国文化科技卫生“三下乡”活动服务标兵，全省仅有3人获此殊荣。这份荣誉，既是对他深耕农业科技推广事业的最高褒奖，也是对我市农技人员科技助农惠农工作的充分肯定。在我市农机推广一线，陈新辉兼具农机工程师、农艺师双重技术职称。自2022年兼任市农技协秘书长以来，一年365天，他很少坐在办公室，大部分时间奔走在乡村农田与农机库房，保障粮食生产始终是他工作的重中之重。\n\n每逢遇到连绵大雨或台风季节，成熟期的稻麦易出现倒伏，收割机作业损耗大幅攀升，给农户造成不小经济损失。每到夏秋农忙季，他带领技术团队奔赴延陵、珥陵、访仙等种粮大镇田间地头，实地测算粮食收割损耗，向农机手、种植农户发放通俗易懂的技术明白纸。他与志愿者们守在收割机旁，手把手指导机手调试设备、规划行车路线。三年来，通过技能培训、现场比武、智能农机推广等系列举措，推动全市80余万亩稻麦机收损失率平均下降2个百分点，累计多收粮食超千万斤，直接带动种粮主体增收数千万元，以“减损即增产”的实践牢牢守住粮食生产稳产增收底线，为保障区域粮食安全筑牢了坚实支撑。近年来，他全身心投入智慧农业建设。2024年，他融合江苏大学、沃得农机及省市县三级农机推广部门，在云阳街道的江苏年丰农业科技有限公司打造了510亩省级无人化稻麦示范农场，无人拖拉机、无人插秧机、农用无人机等智能农机装备陆续投入作业。全市先后建成8个市级无人农场试点，依靠大数据精准种田，每亩地每年可为科技示范户节约生产成本100余元。他还助力推进农机制造企业、科研院所、推广部门与生产基地开展产学研推用一体化，参与本土农机企业江苏欣田机械制造有限公司与南京农业大学研发推广种肥同播一体机，仅一道工序就能完成旋耕、施肥、开沟、精量播种作业等。该机具示范推广成效显著：化肥亩施用量减少35%，种子用量节约30%，粮食产量稳步提升。他常年组织农机实操与安全培训，每年参训农机手、种植大户可达800余人。\n\n再好的机械设备，农民掌握不了技术也难以发挥作用。身兼丹阳农技协志愿服务队长与江苏农机志愿者丹阳分队队长后，陈新辉把两套红马甲常年伴随他下乡，这抹红色，是他和队员扎根乡村、服务农户的鲜明标识。至今，他留存十几本小小的口袋笔记本，上面密密麻麻记录着农户遇到各类生产难题：农机半路故障、果树坐果率低、鱼虾病害频发、农场宜机化改造受阻、农产品销路不畅。农户每反映一个问题，志愿服务队就下乡开展一次上门帮扶。作为丹阳农技协秘书长，他先后组织遴选申报6家科技小院，目前已获批4家，覆盖水稻种植、食用菌培育、土元养殖、水产等领域。农机农技志愿者常年扎根乡村一线：开春走进林果基地开展特色农机示范培训，协助农户对接市场、拓宽销路；秋冬进驻种养基地破解生产技术瓶颈；农闲时节上门协调土地流转、农业信贷等难题。这支志愿服务队累计开展帮扶上百次，举办技术培训百余场，服务农户三千余户，促成十余项校企技术合作，带动农户增收千余万元，还获评2025年度长三角优秀科技志愿服务组织。小丫家庭农场负责人魏国良，正是科技助农的直接受益者。依托陈新辉牵头举办的免费无人机操作培训与电商培训班，他顺利考取农机操作证书。农场选用商品有机肥种植的400多亩水稻，经过精加工在线上品牌销售，一改过去售卖原粮的模式，每亩增收五六百元。农场牵头组建的农机合作社，每年承接四千多亩农田农机作业的服务订单。今年，在陈新辉的建议下，魏国良在水稻生产上首次试验使用土元发酵粪肥，推动种养废弃物就地资源化还田，为大幅减少化肥使用提供示范。司徒镇隆方生态园果蔬基地，也在桃、梨等果蔬种植中开展土元有机肥试验，使果品品质大幅提升，基地的绿色果蔬广受市场青睐。种养大户们都说，陈站长是一专多能的农技人才，农机、农艺样样精通，还熟悉电商销售渠道，只要农户有求助，他总能及时赶到。工作日，他忙于项目落地、基地建设、业务培训；休息日，依然进村入户普及农业科技。白天在田间手把手教学实操技巧，夜晚整理群众诉求，统筹安排下一轮下乡服务。家人常常打趣，他天天围着农机农田打交道，在家待不了几天。可每当听到种植大户发自内心的感谢，所有奔波辛劳都烟消云散。",image:"三下乡.jpg,三下乡2.jpg",author:"文明丹阳"}
+            ],
+            'startup': [
+                {title:"有机农场的创业梦",content:"在安丘市金冢子镇文化路生态有机农业示范片区，有着这样一个科技感与高颜值兼具的生态有机农场。这里建有全玻璃连栋智能温室大棚，即将种满全有机果蔬，还将打造研学、采摘一体化基地。这座总投资千万元的现代化农场，是90后返乡新农人周信龙与张陈艳夫妇用心筑造的“田园梦”。此前，周信龙深耕机械制造十余年，张陈艳精于财务管控，现在二人携手将千万资金与满腔热忱倾注于这片故土。他们的故事，并非简单的“跨界”，而是怀揣新视野、新规划、新期盼的“深耕”。\n\n归乡：从机械厂长到新农人，故土情结促成“跨界”谈起返乡创业的初衷，周信龙感慨万千。早在2012年，他便开办了一家机械厂，专门生产冷库货架，事业做得风生水起。而妻子张陈艳在生下三胎后，便一直在家照顾孩子，并细心打理着工厂的财务和进出账目。“每次回到老家，看着我们金冢子越来越好的农业环境和优越的地理位置，就想着，能不能把家安在田间地头。”张陈艳说。正是这份深厚的故土情结，让夫妻俩毅然决定跨界农业，将工厂的积蓄投入到这片生养他们的土地上，开启了从城市创业者到“新农人”的身份蜕变。\n\n筑基：千万投资高标准建棚，东西分区精细谋划“万丈高楼平地起，种好菜得先建好棚。”面对200亩的广阔土地，夫妻俩深知，想要种出高品质的有机蔬菜，前期的基础设施投入绝不能含糊。农场内数座高架设施大棚已全部建设完毕，总面积约4万平方米。在园区规划上，夫妻俩充分发挥了张陈艳“管家”的细致与周信龙的宏观视野，将农场划分为东西两区。东区建设了8个连跨式高架连体大棚，将主要种植有机西红柿、有机五彩椒，并计划推广种植樱桃新品种“天空之城”，打造高品质的近郊采摘园；西区则主要种植有机马铃薯、有机韭菜、有机西兰花等大众有机蔬菜。“现在看着一排排大棚建起来，心里特别踏实。虽然还没种菜，但我们已经做好了万全的准备。”周信龙望着整齐的大棚，眼中满是憧憬。接下来，他们将着手进行土壤改良，为迎接第一批有机蔬菜幼苗做足准备。\n\n初心：做让自己孩子和父老乡亲都吃得放心的菜作为带着三个孩子的父母，夫妻俩在规划这200亩土地时，融入了更多“家”的元素。农场建设期间，最让人动容的一幕，是孩子们穿梭在工地里，兴致勃勃地体验“拧螺丝”。小小的双手握着工具，在父母的鼓励下将一个个零件牢牢固定。“我们不想让孩子只待在温室里，想让他们知道，这4万平方米的大棚，是爸爸妈妈一砖一瓦、一钉一螺建起来的。”张陈艳笑着说。谈及农场的未来，张陈艳的眼神格外坚定：“我们种有机蔬菜的初心很简单——做让自己孩子吃得放心、让父老乡亲也吃得放心的有机蔬菜。”这句话，不仅是她对三个孩子的承诺，更是她对这片土地和所有消费者的庄严誓言。\n\n融合：突出近郊休闲，从“卖产品”向“卖体验”的田园升级依托文化路沿线优越的地理位置，农场未来将大力发展近郊休闲农业。“等大棚里的蔬菜长起来，西区主打高品质有机菜供应，东区则向市民开放采摘体验，致力于为城市家庭打造“吃得放心、玩得开心”的专属菜园。”周信龙介绍，农场将实现从“卖产品”到“卖体验”的升级，也让自己的三个孩子从小懂得“盘中餐”的来之不易。\n\n共富：一人富不算富，带着乡亲一起干“土地流转不是把地收上来就完事，核心是带着大家把日子过得更好。”在自身发展壮大的同时，夫妻俩没有忘记周边的乡亲。千万级农场的建设与未来的日常管护，为周边村庄提供了数十个就近务工的岗位。在农忙时节，基地优先聘用本村闲置劳动力，让村民实现了“家门口就业”。周信龙夫妇的“跨界深耕”并非孤军奋战，而是金冢子镇以政策为擎、深化校地合作、完善农产品产供销全链条，吸引众多“新农人”返乡创业的生动缩影。\n\n近年来，金冢子镇秉持“连片规划、一体打造、集群发展”理念，以文化路生态有机农业示范片区为核心，全力推动农业高质量发展。通过推进土地规模化整合，文化路沿线近万亩“碎块田”被打造成连片成势的“有机田”“设施田”，为新农人搭建了广阔的发展舞台。如今，这片沃野正以马铃薯等有机农业为主导，依托科技赋能与全链升级，加速推动传统农业向高品质转型。随着文化路生态有机农业示范片区不断焕发新生机，未来必将吸引更多怀揣梦想的新农人回乡创业。他们将以科技赋能农业，以初心守护健康，共同绘就一幅生态美、产业兴、农民富的乡村振兴新图景。",image:"有机农场.jpg,有机农场2.jpg",author:"安丘发布"},
+                {title:"乡村旅游的创新者",content:"北京市延庆区民宿联盟成立于2017年7月，是北京市，也是北方地区首个由政府主导成立的民宿行业组织。联盟成员以延庆区经营精品民宿的企业为主，现有成员单位48家，共有精品民宿小院180个。联盟自成立以来，在北京市文旅局的指导下，在北京市延庆区文旅局的大力推动下，坚持以服务民宿行业发展为宗旨，找准自身定位、不断创新突破，为民宿行业组织建设做出有益探索，为延庆民宿产业发展做出应有贡献。\n\n不断创新，实现六个首创突破，为京郊民宿行业发展及组织建设探索路子（一）创新成立首个民宿行业组织。在北京市乃至整个北方地区还处在民宿产业起步发展阶段，延庆区就已意识到民宿行业组织对于产业发展的重要作用。2017年7月，在延庆区文旅局的推动下，北京市延庆区民宿联盟正式成立。联盟以助力民宿产业发展为己任，积极挖掘和培育区域内民宿品牌，至今，联盟已从创始的10家品牌、30个民宿小院发展为48家品牌、180个民宿小院，不到两年时间，实现了规模翻两番发展。延庆民宿联盟的成立也引领着民宿行业组织的发展，2018年北京市怀柔区、盘锦市等也分别成立民宿分会、民宿联盟等行业组织。（二）创新推出首个地域民宿品牌。结合世园会举办，号召全体成员积极配合，打造了延庆统一民宿品牌，也是北京市首个地域民宿品牌——世园人家，各家成员从园艺特色、文化氛围、旅游配套等各方面进行了综合提升，最终联盟全部成员成为世园人家，为“世园人家”的打造起到示范带头作用。\n\n（三）创新建设首个民宿集群。2018年6月，联盟推动合宿·姚官岭项目正式落地建设，这也是北方地区首个民宿集群项目，项目一期吸引了原乡里、左邻右舍等6家本土民宿品牌，通过民宿集群建设，进一步整合了各家在管家服务、线上营销等不同方面的优势，并通过统一运营，平摊接待中心、休闲娱乐等设施建设费用，缩减各家运营成本。后续，民宿集群将成为联盟重点推进的项目形式，目前正在与知名设计师、台湾民宿协会对接，将分别推进设计师民宿群和台湾民宿村项目落地建设。（四）创新举办民宿行业大会。2017年7月，抓住当时乡村旅游“民宿”热点话题，抢占先机，举办首届北方民宿大会，打破地域局限性，立足延庆、面向北方、辐射全国，组织全国专家学者、民宿大咖等汇聚延庆研究讨论北方民宿发展相关课题，竖起延庆北方民宿发展的大旗。2018年举办第二届北方民宿大会，扩大活动规模，丰富活动内容，并倡议成立了北方民宿联盟，进一步提升和夯实了延庆作为北方民宿发展阵地的品牌形象。\n\n（五）倡议成立北方民宿联盟。2018年11月，延庆区民宿联盟发起倡议，联合京津冀地区的44家民宿及上下游行业协会、民宿企业等共同成立北方民宿联盟，并发表共同宣言，从民宿产业协同发展层面，落实国家京津冀协同发展战略。延庆民宿联盟作为北方民宿联盟秘书长单位，积极贡献自身在民宿产业发展中积累的经验做法，并邀请全国民宿协会会长、中国十佳民宿创始人等民宿业内专家，开展了系列北方民宿联盟培训，提高北方民宿联盟整体行业发展水平；同时与北京银行合作签署了“千院计划”，为北方民宿联盟成员提供贷款便利支持，计划3年内在京津冀地区建设改造1000家特色民宿小院，新增2万个就业岗位，助力京津冀民宿产业建设。（六）创新开发首个地域民宿平台。为进一步整合延庆民宿资源，加强延庆民宿推广和营销，2018年1月民宿联盟6家理事单位成立了沿途旅游公司，同时开发了北京首个区级自有民宿预订平台——沿途旅游，实现了本地区所有精品民宿和世园人家的线上销售，截至目前共有线上商家200余家。后续，沿途将以打造京津冀地区精品版“携程”为目标，以北方民宿联盟为重点，入驻商家将涵盖京津冀地区重点精品民宿及民宿客栈，为京津冀民宿企业提供更为广阔的展示平台，为京津冀游客提供精品住宿产品预订平台。",image:"创新.jpg,创新2.jpg",author:"中国网"}
+            ],
+            'planning': [
+                {title:"乡村规划的实践者",content:"村美村位于龙岩中心城区北部，距龙岩北出口仅4公里，全村总人口1610人，村居环境优美，四季山花烂漫，宛如一颗明珠镶嵌在美丽岩城的青山绿水间，与周边睡美人、江山大峡谷、山塘兵工厂、无人村、龙井瀑布和石佛公等景区相映成趣，是新罗区首批美丽乡村建设示范村、生态旅游特色村，2018年被列入乡村振兴试点村。\n\n村美村立足龙岩中心城区后花园的定位，利用村内优质资源，提出“以水带链、以点带面、村景交融、人文共生”规划理念，以一二三产业融合发展为思路，注重多规合一，落实上位规划，量化内部用地及建设情况、功能属性及未来计划，挖掘存量建设用地，保护与传承历史文化，开展人居环境整治，实施国土综合整治与生态修复工程，以“龙岩市未来乡村新样板、龙岩市微度假休闲旅游目的地、生态慢谷村落景区”为发展定位，“这么近，去村美。江山怡人，村美如画”为宣传口号，打造成为新罗区乡村振兴样板村。\n\n二、规划特色与创新1.以留住乡愁为主线，促进生态与文化双向活化重点围绕山水林田湖草沙保护与开发相协调策略，实施生态与文化双向整治提升工程，留住“乡愁记忆”，促进乡村振兴。依托雪云湖开发滨水露营，依托乌荇溪源头及洋北古村落开发集亲子住宿康养于一体的牧星谷等；修复石磨芯岭古驿道并开发徒步研学项目，修复文天祥练兵遗址并建设文天祥纪念公园，保护修复龙岩起义旧址—江山村美傅氏宗祠传承红色基因；对东阳山整体开发，计划进行步道建设、观光缆车安装、全景观景台打造、九候文化展示馆建设、文天祥公园至九候叠嶂道路建设等；依托雪云禅院开展禅修体验、住宿体验等；实施农房整治、绿化美化及缆线整治等人居环境综合整治措施，提升村庄整体风貌及居住质量，助力打造新罗区乡村振兴样板村。2.以“多规合一”为优势，构建村域国土空间新格局。以“多规合一”打破规划壁垒，融合各类规划，形成“一张蓝图”。依托“龙岩市城乡规划设计院空间规划及业务协同平台”数据共享与协同决策优势，结合无人机航拍、遥感影像、年度变更、用地审批等多源数据，采取定量与定性手段，优先保障生态保护红线、永久基本农田等刚性空间，同时优化居住、产业、民生设施布局，让规划既符合国家战略，又贴合村发展需求。\n\n三、规划实施成效（一）产业发展规划提出“打造以‘生态观光，娱乐古村’为核心定位的乡村休闲旅游产业”。目前已经完成开发建设的旅游产业项目有牧星谷、潋滟山舍等。（二）规划与土地政策融合规划落实与土地政策融合策略，做好后续跟踪服务，有效指导村美村康养服务中心从规划调整、项目选址、控规编制、用地审批、建设实施等全过程，确保该项目落地实施。（三）人居环境整治在村庄规划指导下，村美村围绕“补短板、美环境、惠民生”，实施人居环境整治项目，以乌荇溪两岸农房为基础，因地制宜对农房外立面及沿路步道、围栏、绿化种植进行统一美化改造，将人居环境“黑点”改造为农房风貌“亮点”，打造美丽宜居且具有鲜明江山特色的和美乡村。（四）生态保护与文化传承。生态保护方面：在村庄规划的指导下，结合新罗区江山集镇改造二期工程——村美村人居环境整治项目，实施乌荇溪两侧生态护岸建设，对上游乌荇溪和下游雪云湖进行水生态治理和修复。 文化传承方面：在村庄规划的指导下，村美村秉承保护与传承历史文化的责任感，通过保护与开发相结合的方式，保护文天祥雕像，建设文天祥文化公园，建设闽西起义广场，传承弘扬历史文化。（五）基础设施与公共服务提升。在村庄规划的指导下，村美村先后完成村美村村道修复、村美村停车场建设、纪先堂新建等工程。\n\n四、规划服务规划团队长期扎根村美村，提供全方位的技术服务保障，针对该村实际需求，开展“技术咨询-动态跟踪-全程指导”的全过程陪伴式服务模式。一是开展新房及重点项目建设等全过程咨询服务，如牧星谷的康养服务中心、个人危旧房建设等。二是依托无人机、大数据平台等科技优势，融合内外业调查，现场落实村民的需求疑问，增加规划的科学合理性。三是构建常态化沟通平台，与镇村建立微信工作群，实现技术指导与基层治理的有机融合，显著提升了村庄治理水平和可持续发展能力。",image:"规划.jpg,规划2.jpg",author:"福建省自然资源厅"},
+                {title:"民居改造的魔术师",content:"中国美丽休闲乡村、国家首批绿色村庄、省级历史文化名村、省级特色旅游村、省级美丽乡村、省级美丽宜居示范村等荣誉称号。如今的毛岙村已逐渐成为一个集运动休闲、生态体验、养生度假为一体的富饶美丽乡村。\n\n毛岙村以“浙东民居”样板村建设为契机，整合村内山水、人文、产业等各项旅游资源，进一步完善村域旅游空间布局，大力推进农房改造提升，打造集健康养生、民宿艺术于一体的主题鲜明、定位清晰的生态村，启动“生态毛岙”建设。\n\n（一）集中农房改造，升级旅游业态　　毛岙村注重农房集中连片改造，通过未来乡村建设、毛力梳理式改造建设、毛岙村浙东民居样板村改造、毛力和美北山共富示范等项目，集中对村庄的重点道路、公共区域、建筑外立面、空调外机装饰、庭院门墙等进行提升。同时，积极招引培育文旅新业态，成功引进了投资近7500万的大乐之野·勿舍、莲心谷、居善地等3家高端民宿品牌项目，打造了江北区首家乡村精品书吧，使得毛岙村成为宁波远近闻名的民宿聚集区，为村庄经济发展注入强大活力。（二）提升公共建筑，完善旅游配套。近年来，毛岙村投入4500万元进行乡村振兴改造提升项目，重点开展了立面改造、河道整治、生活污水处理等环境治理工作，先后实施生态公园、环湖自行车道、休闲农家民宿等项目，目前村内建有多功能综合性游客服务中心、生态公园一期二期、生态停车场等旅游功能配套设施，对村庄重点道路、电线及立面进行改造，进一步提升毛岙村面貌，推进乡村发展数字化、智能化、现代化。（三）发展乡村产业，引领村强民富一是打响林特资源牌，为聚焦绿色产业、发展壮大农特产业，种植适合本村发展的农产品种植，向游客提供土特产采摘体验。二是打好乡村旅游牌，动员村干部开办了茶语山庄、茂湖山庄、村门口等农家乐；通过主动雇佣邻里、解决就业，带头承诺协商定价、推行家庭式服务等方式推动了毛岙村民宿产业发展，目前村内已有十余家农家乐。同时积极主动融入市、区旅游开发项目，修建了6.1公里的环村登山游步道与2.3公里的水库环湖标准自行车道，形成了集登山、自行车、徒步、环湖长跑等运动一体区，并已连续承办多届宁波山地马拉松赛事。",image:"民居.jpg,民居2.jpg",author:"宁波住建"}
+            ]
+        };
+
+        // 青年案例弹窗
+        const casesModal = document.createElement('div');
+        casesModal.id = 'cases-modal';
+        casesModal.className = 'modal hidden';
+        casesModal.innerHTML = '<div class="modal-overlay" id="cases-overlay"></div><div class="modal-content"><button class="modal-close" id="cases-close">&times;</button><div id="cases-detail" style="padding:40px;"></div></div>';
+        document.body.appendChild(casesModal);
+
+        const casesOverlay = document.getElementById('cases-overlay');
+        const casesClose = document.getElementById('cases-close');
+        const casesDetail = document.getElementById('cases-detail');
+
+        function loadCases(category) {
+            const casesGrid = document.getElementById('cases-grid');
+            const cases = youthCasesData[category] || [];
+            if (cases.length === 0) {
+                casesGrid.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">暂无相关案例，敬请期待...</p>';
+                return;
+            }
+            let html = '';
+            cases.forEach((item, index) => {
+                var coverImg = item.image.split(',')[0].trim();
+                html += '<div class="story-card" data-case="'+category+'-'+index+'"><div class="story-img" style="background:url(\''+coverImg+'\') center/cover no-repeat;"><span class="story-emoji">👨‍🌾</span></div><div class="story-body"><h3>'+item.title+'</h3><p>'+item.content.substring(0,80)+'...</p><span class="story-tag">👤 '+item.author+'</span></div></div>';
+            });
+            casesGrid.innerHTML = html;
+
+            document.querySelectorAll('.story-card[data-case]').forEach(card => {
+                card.addEventListener('click', () => {
+                    const parts = card.dataset.case.split('-');
+                    const cat = parts[0];
+                    const idx = parseInt(parts[1]);
+                    const caseItem = youthCasesData[cat][idx];
+                    var imgs = caseItem.image ? caseItem.image.split(',') : [];
+                    var imgHtml = '';
+                    var hasImg = false;
+                    for (var i = 0; i < imgs.length; i++) {
+                        var src = imgs[i].trim();
+                        if (src) {
+                            imgHtml += '<img src="'+src+'" style="width:48%;max-width:400px;height:auto;object-fit:contain;border-radius:8px;display:inline-block;margin-right:2%;">';
+                            hasImg = true;
+                        }
+                    }
+                    if (hasImg) {
+                        casesDetail.innerHTML = '<h2 style="color:#1a1a1a;margin-bottom:16px;">'+caseItem.title+'</h2><div style="margin-bottom:20px;">'+imgHtml+'</div><div style="max-width:800px;"><p style="color:#666;line-height:1.8;">'+caseItem.content.replace(/\n\n/g, '</p><p style="color:#666;line-height:1.8;">')+'</p><p style="margin-top:16px;color:#999;">分享者：'+caseItem.author+'</p></div>';
+                    } else {
+                        casesDetail.innerHTML = '<h2 style="color:#1a1a1a;margin-bottom:16px;">'+caseItem.title+'</h2><div style="max-width:800px;"><p style="color:#666;line-height:1.8;">'+caseItem.content+'</p><p style="margin-top:16px;color:#999;">分享者：'+caseItem.author+'</p></div>';
+                    }
+                    casesModal.classList.remove('hidden');
+                    studyRecord.startTimer('article');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+        }
+
+        function closeCasesModal() {
+            casesModal.classList.add('hidden');
+            document.body.style.overflow = '';
+            studyRecord.stopTimer('article');
+        }
+
+        casesClose.addEventListener('click', closeCasesModal);
+        casesOverlay.addEventListener('click', closeCasesModal);
+
+        // 青年力量卡片点击事件
+        document.querySelectorAll('.way-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.dataset.way;
+                loadCases(category);
+                document.getElementById('youth-cases').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // 分享实例功能
+        function loadSharedStories() {
+            const storiesList = document.getElementById('stories-list');
+            const stories = JSON.parse(localStorage.getItem('shared_stories') || '[]');
+            if (stories.length === 0) {
+                storiesList.innerHTML = '<p style="text-align:center;color:#999;padding:40px;">暂无用户分享，快来成为第一个分享的人吧！</p>';
+                return;
+            }
+            const categoryNames = {'tech':'科技助农','ecommerce':'电商惠农','culture':'文化兴农','volunteer':'志愿帮农','startup':'返乡创业','planning':'规划建农'};
+            let html = '';
+            stories.forEach(story => {
+                html += '<div class="shared-story-card"><div class="story-header"><h3>'+story.title+'</h3><span class="story-category">'+categoryNames[story.category]+'</span></div><p class="story-content">'+story.content+'</p>'+(story.media?'<img src="'+story.media+'" class="story-image">':'')+'<div class="story-footer"><span class="story-author">分享者：'+story.name+'</span><span class="story-date">'+new Date(story.date).toLocaleDateString()+'</span></div></div>';
+            });
+            storiesList.innerHTML = html;
+        }
+
+        // 提交分享
+        document.getElementById('submit-share').addEventListener('click', () => {
+            const title = document.getElementById('share-title').value.trim();
+            const category = document.getElementById('share-category').value;
+            const content = document.getElementById('share-content').value.trim();
+            const media = document.getElementById('share-media').value.trim();
+            const name = document.getElementById('share-name').value.trim();
+            if (!title || !content || !name) {
+                alert('请填写完整信息！');
+                return;
+            }
+            const stories = JSON.parse(localStorage.getItem('shared_stories') || '[]');
+            stories.push({id:Date.now(),title,category,content,media,name,date:new Date().toISOString()});
+            localStorage.setItem('shared_stories', JSON.stringify(stories));
+            document.getElementById('share-title').value = '';
+            document.getElementById('share-content').value = '';
+            document.getElementById('share-media').value = '';
+            document.getElementById('share-name').value = '';
+            alert('分享成功！');
+            loadSharedStories();
+        });
+
+        // 初始化加载分享
+        loadSharedStories();
+
+        // 文章弹窗
+        const articleModal = document.getElementById('article-modal');
+        const articleOverlay = document.getElementById('article-overlay');
+        const articleClose = document.getElementById('article-close');
+        const articleDetail = document.getElementById('article-detail');
+
+        const articleData = {
+            'grain-security': {
+                title: '粮食安全：国之大者的战略底线',
+                content: `
+    <p>中国用占世界9%的耕地 and 6%的淡水资源，养育了世界近20%的人口。这是一个了不起的成就，也是中国共产党领导下的中国特色社会主义制度优越性的生动体现。</p>
+    <p>粮食安全是"国之大者"，是维护国家安全的重要基石。习近平总书记多次强调："中国人的饭碗任何时候都要牢牢端在自己手中，饭碗主要装中国粮。"这一重要论述，深刻揭示了粮食安全对于国家发展和民族复兴的战略意义。</p>
+    <h3>一、粮食安全的战略意义</h3>
+    <p>粮食安全是国家安全的重要组成部分。没有粮食安全，就没有国家的稳定和发展。在复杂多变的国际形势下，保障粮食安全尤为重要。</p>
+    <p>从2004年到2024年，中央连续二十一年发布以"三农"为主题的一号文件，这在新中国历史上绝无仅有。这充分体现了党中央对农业、农村、农民问题的高度重视。</p>
+    <h3>二、中国粮食安全的成就</h3>
+    <p>党的十八大以来，我国粮食产量连续9年稳定在1.3万亿斤以上，人均粮食占有量超过490公斤，高于国际公认的400公斤安全线。这一成就的取得，离不开党中央的坚强领导，离不开亿万农民的辛勤付出，离不开农业科技的支撑。</p>
+    <h3>三、面临的挑战与对策</h3>
+    <p>我们必须清醒认识到：我国耕地面积有限，水资源时空分布不均，种业核心技术仍有差距。保障粮食安全，既要保数量，更要保质量、保多样。</p>
+    <p>要牢牢守住18亿亩耕地红线，深入实施种业振兴行动，强化农业科技支撑，推进农业现代化。只有这样，才能确保国家粮食安全，为实现中华民族伟大复兴的中国梦提供坚实保障。</p>
+                `
+            },
+            'cpc-farmer': {
+                title: '中国共产党助农举措的历史逻辑与实践成就',
+                content: `
+    <p>中国共产党自成立以来，始终把农民利益放在首位，始终致力于解决"三农"问题。从土地革命到乡村振兴，党的助农举措始终与时代同步，与人民同心。</p>
+    <h3>一、土地革命时期："打土豪分田地"</h3>
+    <p>土地革命时期，党领导农民开展土地革命，"打土豪分田地"，让广大农民获得了土地，翻身做主人。这一举措极大地调动了农民的革命积极性，为革命胜利奠定了坚实的群众基础。</p>
+    <h3>二、改革开放时期：家庭联产承包责任制</h3>
+    <p>改革开放率先从农村突破。1978年，安徽小岗村的18位农民在土地承包责任书上按下红手印，拉开了中国农村改革的序幕。家庭联产承包责任制的推行，极大地解放了农村生产力，激发了农民的生产积极性。</p>
+    <h3>三、新时代：脱贫攻坚与乡村振兴</h3>
+    <p>进入新时代，党持续推进乡村振兴战略，加快农业农村现代化，让农业更强、农村更美、农民更富。农村人居环境整治、农村厕所革命、建制村通硬化路通客车、农村饮水安全工程……一项项务实举措，让农村面貌焕然一新。</p>
+    <h3>四、历史启示</h3>
+    <p>中国共产党助农举措的历史实践表明：只有始终坚持以人民为中心的发展思想，始终把农民利益放在首位，才能赢得农民的支持和拥护，才能实现农业强、农村美、农民富的目标。</p>
+                `
+            },
+            'agri-modern': {
+                title: '农业现代化：中国式现代化的重要基础',
+                content: `
+    <p>没有农业农村现代化，就没有整个国家现代化。农业现代化是中国式现代化的重要组成部分和基础支撑。</p>
+    <h3>一、农业现代化的内涵</h3>
+    <p>农业现代化是指用现代科学技术和现代工业装备农业，用现代科学管理方法管理农业，实现农业生产的机械化、电气化、信息化、智能化。</p>
+    <h3>二、中国农业现代化的成就</h3>
+    <p>当前，我国农业科技进步贡献率超过63%，农作物耕种收综合机械化率达73%，良种覆盖率超过96%。数字农业、智慧农业加速发展，5G+农业、农业机器人等新技术新装备不断涌现。</p>
+    <p>这些成就的取得，离不开党中央的高度重视和大力投入，离不开广大农业科技工作者的辛勤努力，离不开亿万农民的积极参与。</p>
+    <h3>三、面临的挑战</h3>
+    <p>与发达国家相比，我国农业劳动生产率仍有差距，农业产业链价值链还需提升。农业基础设施还不够完善，农村人才短缺问题依然突出。</p>
+    <h3>四、推进农业现代化的路径</h3>
+    <p>建设农业强国，要走中国特色农业现代化之路：</p>
+    <ul>
+        <li>以科技为支撑提升农业质量效益</li>
+        <li>以改革为动力激活农村要素资源</li>
+        <li>以融合为路径拓展农业多种功能</li>
+        <li>以绿色为导向推动农业可持续发展</li>
+    </ul>
+    <p>只有加快推进农业现代化，才能为中国式现代化提供坚实的物质基础，才能实现中华民族伟大复兴的中国梦。</p>
+                `
+            }
+        };
+
+        const articleButtons = document.querySelectorAll('.article-expand');
+        articleButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const articleId = btn.dataset.article;
+                const article = articleData[articleId];
+                if (article) {
+                    articleDetail.innerHTML = `
+                        <h2>${article.title}</h2>
+                        ${article.content}
+                    `;
+                    articleModal.classList.remove('hidden');
+                    studyRecord.startTimer('article');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        const closeArticleModal = () => {
+            articleModal.classList.add('hidden');
+            document.body.style.overflow = '';
+            studyRecord.stopTimer('article');
+        };
+
+        articleClose.addEventListener('click', closeArticleModal);
+        articleOverlay.addEventListener('click', closeArticleModal);
+
+        // 农民风采 - 真实人物故事（公众号图文样式）
+        const storyCards = document.querySelectorAll('.story-card');
+        const storyData = {
+            grain: {
+                title: '怀柔麦田里的"云端课堂"——种粮大户王志明的丰收账',
+                cover: './images/02-farmland-harvest/wheat-harvest.jpg',
+                location: '北京 · 怀柔区桥梓镇平义分村',
+                source: '北京市农业农村局',
+                sourceUrl: 'https://nyncj.beijing.gov.cn/nyj/snxx/gzdt/744043957/index.html',
+                gallery: ['./images/04-farmers-life/farmer-work.jpg', './images/03-agricultural-machinery/tractor.jpg'],
+                content: `
+    <p>在北京市怀柔区桥梓镇平义分村，种粮大户王志明这两年最大的感受，是种地不再只靠经验和天气，而是多了一份"专家就在身边"的踏实感。去年小麦播种偏晚，他心里一直没底，好在农业专家几乎每个月都要下地指导好几次，跟着专家的建议一步步落实下来。</p>
+    <div class="story-quote">"今年小麦收成真是超预期。"——王志明</div>
+    <p>这份踏实，来自怀柔区在北房镇试点的"整镇制单产提升"机制：市、区、镇三级联动，农技专家对种植大户实行一对一包户支持、全程跟踪服务，还组建了覆盖数百位农户的小麦交流微信群，随时解答技术问题、推送天气预警、分享田间经验，成了一个永不下线的"云端课堂"。</p>
+    <p>像王志明这样从"靠天吃饭"转向"靠数据种田"的种粮大户，正是北京落实"藏粮于地、藏粮于技"战略、保障首都粮食安全的一个缩影。</p>
+                `
+            },
+            ecommerce: {
+                title: '大棚里飞出的"网红产品"——大兴姑娘陈山山的助农直播路',
+                cover: 'images/04-farmers-life/farmer-market.jpg',
+                location: '北京 · 大兴区安定镇前野厂村',
+                source: '北京市大兴区人民政府',
+                sourceUrl: 'https://www.bjdx.gov.cn/bjsdxqrmzf/zwfw/ztlm/dxqcjqgwmcqgzzt/wmcjdt/2119982/index.html',
+                gallery: ['./images/07-digital-agriculture/data-analysis.jpg', './images/08-leisure-tourism/countryside-life.jpg'],
+                content: `
+    <p>在北京市大兴区安定镇前野厂村，陈山山的名字几乎和村里的桑叶茶、桑菇酱划上了等号。她推动农文旅融合发展，带动村内及周边30多户村民一起做桑蚕特色产业，也让前野厂村拿到了全国"一村一品"示范村的荣誉。</p>
+    <p>除了带乡亲们种桑养蚕，陈山山还自主研发出桑叶茶、桑菇酱、桑叶酱等衍生产品，据介绍，这些产品已为村民带来220多万元的经济效益。她牵头成立的志愿服务队，也通过内销外销、社区商超直通车等渠道，帮乡亲们卖出过6000多斤大棚蔬菜 and 3000多盆鲜花。</p>
+    <p>2023年，陈山山报名参加青年电商人才培养计划，第一次尝试网络直播带货。首场直播就吸引了60多万人次观看，成交额达到13万元。凭借这些成绩，她被评为北京市农村致富能手。</p>
+                `
+            },
+            startup: {
+                title: '从时尚妈妈到农场主理人——马海荣的"归园"创业记',
+                cover: './images/07-digital-agriculture/technology-farm.jpg',
+                location: '北京 · 怀柔区',
+                source: '北京市农业农村局',
+                sourceUrl: 'https://nyncj.beijing.gov.cn/nyj/jcsn/whgs/bjxczxgs/436261483/index.html',
+                gallery: ['./images/06-eco-agriculture/organic-farm.jpg', './images/08-leisure-tourism/rural-picnic.jpg'],
+                content: `
+    <p>马海荣曾经是个不折不扣的都市"时尚妈妈"，直到一次朋友引荐，让她第一次走进怀柔一处有机农场，从此和这片土地结下不解之缘。她后来创办的HiMaMa锦会农场，把亲子农业教育、休闲度假 and 有机种植做成了一个整体。</p>
+    <div class="story-quote">"我一直把亲子农场作为我人生的一件美好作品。"——马海荣</div>
+    <p>在商业模式、服务和内容三个方面，锦会农场都做了不少新尝试：既让城里家庭能就近体验田园假期，也和农业院校、文旅从业者保持着密切的参访交流，还先后签约了两家幼儿园，成为它们的农耕教育基地。</p>
+    <p>2023年9月，在北京市怀柔科学城举行的第七届北京市农村创业创新大赛上，马海荣带着锦会农场的项目拿下了第一名。她希望未来能有更多城市家庭走进乡村，也希望更多有机农业项目能够实现盈利、持续经营下去。</p>
+                `
+            },
+            teacher: {
+                title: '扎根曹家路的三尺讲台——乡村教师张怀丰的坚守',
+                cover: './images/04-farmers-life/traditional-farming.jpg',
+                location: '北京 · 山区乡村中学',
+                source: '光明网「寻找最美乡村教师」',
+                sourceUrl: 'https://edu.gmw.cn/zuimei/',
+                gallery: ['./images/05-rural-scenery/rural-village.jpg', './images/04-farmers-life/farmer-happy.jpg'],
+                content: `
+    <p>张怀丰是北京市曹家路村曹家路中学的一名教师，多年来一直扎根在山区教育岗位上。在同事和学生眼里，他把大半生都交给了这所乡村学校，也交给了一批又一批从这里走出去的孩子。</p>
+    <p>2011年，光明日报社联合北京广播电视台发起"寻找最美乡村教师"大型公益活动，张怀丰就是其中被记录下来的一位。活动希望通过挖掘和宣传这样一批扎根乡村、甘于奉献的教师，在全社会营造尊师重教的氛围。</p>
+    <p>像张怀丰这样的乡村教师，往往没有惊天动地的事迹，日复一日守着不多的几间教室、几十个学生，却在乡村教育资源相对薄弱的年代，撑起了孩子们走出大山的希望，也是首都乡村振兴中"扶智"的重要一环。</p>
+                `
+            }
+        };
+
+        storyCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const story = storyData[card.dataset.story];
+                if (!story) return;
+                articleDetail.innerHTML = `
+                    <div class="story-hero-img" style="background-image:url('${story.cover}')"></div>
+                    <h2>${story.title}</h2>
+                    <div class="story-meta">
+                        <span>📍 ${story.location}</span>
+                        <span>📰 来源：${story.source}</span>
+                    </div>
+                    ${story.content}
+                    <div class="story-gallery">
+                        <img src="${story.gallery[0]}" alt="乡村场景配图">
+                        <img src="${story.gallery[1]}" alt="乡村场景配图">
+                    </div>
+                    <p class="story-gallery-caption">以上为京郊乡村场景配图，非新闻原图</p>
+                    <div class="story-footer">
+                        <a class="story-source-link" href="${story.sourceUrl}" target="_blank" rel="noopener">📖 阅读原文 / 观看视频报道</a>
+                    </div>
+                    <p class="story-disclaimer">内容整理自公开报道，点击"阅读原文"可跳转至原始报道页面查看完整图文及视频。</p>
+                `;
+                articleModal.classList.remove('hidden');
+                studyRecord.startTimer('article');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // 数字计数器动画
+        const counters = document.querySelectorAll('.counter-num');
+        const counterContainer = document.querySelector('.inspire-counter');
+        let hasAnimated = false;
+
+        const animateCounters = () => {
+            if (hasAnimated) return;
+            if (!counterContainer) return;
+            
+            const rect = counterContainer.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.8) {
+                counters.forEach(counter => {
+                    const target = parseInt(counter.dataset.target);
+                    const duration = 2000;
+                    const startTime = Date.now();
+                    
+                    const animate = () => {
+                        const elapsed = Date.now() - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const current = Math.floor(target * easeOut);
+                        counter.textContent = current.toLocaleString();
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(animate);
+                        }
+                    };
+                    
+                    animate();
+                });
+                hasAnimated = true;
+            }
+        };
+
+        window.addEventListener('scroll', animateCounters);
+        animateCounters(); // 初始检查
+
+
+        // ==================== 渠道共享交互核心 JS 逻辑 ====================
+        let selectedType = '粮食'; // 默认选中大类
+        const typeButtons = document.querySelectorAll('.type-btn');
+        const shareForm = document.getElementById('share-form');
+        const btnSubmit = document.getElementById('btn-submit');
+        const btnClear = document.getElementById('btn-clear');
+        const infoContainer = document.getElementById('info-container');
+        const boardCount = document.getElementById('board-count');
+
+        // 默认内置的共享种子数据（全平台可见示例）
+        const defaultShares = [
+            { type: '粮食', name: '五常大米种植专业合作社', identity: '农户', phone: '13812345678', wechat: 'wuchang_rice', time: '刚刚' },
+            { type: '水果', name: '山东烟台红富士批发商', identity: '经销商', phone: '13987654321', wechat: 'yt_apple_king', time: '5分钟前' },
+            { type: '蔬菜', name: '寿光蔬菜基地示范户-老王', identity: '农户', phone: '13566668888', wechat: 'shouguang_veg', time: '20分钟前' }
+        ];
+
+        // 初始化或从内置库读取共享池
+        let sharedPool = JSON.parse(localStorage.getItem('agri_shares')) || defaultShares;
+
+        // 1. 左侧大类选择切换
+        typeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                typeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedType = btn.dataset.type;
+            });
+        });
+
+        // 2. 渲染全平台共享看版
+        const renderShareBoard = () => {
+            infoContainer.innerHTML = '';
+            boardCount.textContent = `已同步：${sharedPool.length} 条数据`;
+
+            if (sharedPool.length === 0) {
+                infoContainer.innerHTML = '<div class="empty-tip">暂无共享渠道信息，欢迎点击右侧表单提交同步！</div>';
+                return;
+            }
+
+            // 按时间倒序，最新的显示在最前
+            sharedPool.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'info-card';
+                
+                const identityClass = item.identity === '农户' ? 'farmer' : 'dealer';
+                const identityIcon = item.identity === '农户' ? '👨‍🌾' : '🚛';
+
+                card.innerHTML = `
+                    <div class="card-tags">
+                        <span class="tag-type">${item.type}</span>
+                        <span class="tag-identity ${identityClass}">${identityIcon} ${item.identity}</span>
+                    </div>
+                    <div class="card-name">${escapeHTML(item.name)}</div>
+                    <div class="card-detail-item">📞 手机号：<span>${escapeHTML(item.phone)}</span></div>
+                    <div class="card-detail-item">💬 微信号：<span>${item.wechat ? escapeHTML(item.wechat) : '未填写'}</span></div>
+                    <div style="font-size:11px; color:#aaa; margin-top:10px; text-align:right;">🕒 发布状态：全台互通中 (${item.time || '同步中'})</div>
+                `;
+                infoContainer.appendChild(card);
+            });
+        };
+
+        // 防止注入安全函数
+        const escapeHTML = (str) => {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        };
+
+        // 3. 右侧提交表单，实时同步全台
+        btnSubmit.addEventListener('click', () => {
+            if (!shareForm.checkValidity()) {
+                shareForm.reportValidity();
+                return;
+            }
+
+            const newShare = {
+                type: selectedType,
+                name: document.getElementById('share-name').value.trim(),
+                identity: document.getElementById('share-identity').value,
+                phone: document.getElementById('share-phone').value.trim(),
+                wechat: document.getElementById('share-wechat').value.trim(),
+                time: '刚刚'
+            };
+
+            // 压入全局数组首位
+            sharedPool.unshift(newShare);
+            localStorage.setItem('agri_shares', JSON.stringify(sharedPool));
+
+            // 执行重新渲染并重置表单
+            renderShareBoard();
+            shareForm.reset();
+            alert('🎉 信息已成功同步！已进入“红色助农”全平台共享池，所有终端即时可见。');
+        });
+
+        // 4. 清除调试数据
+        btnClear.addEventListener('click', () => {
+            if (confirm('是否确定清空平台上的模拟共享渠道数据？')) {
+                sharedPool = [];
+                localStorage.removeItem('agri_shares');
+                renderShareBoard();
+            }
+        });
+
+        // 初始化看版渲染
+        renderShareBoard();
+
+        // 视频卡片悬停效果增强
+        videoCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // 政策卡片悬停效果
+        const policyCards = document.querySelectorAll('.policy-card');
+        policyCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+</body>
+</html>
